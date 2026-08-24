@@ -2,12 +2,22 @@
 session_start();
 define('APP_ROOT', dirname(__DIR__));
 define('DATA_DIR', APP_ROOT . '/data');
+// Live/private data should survive Hostinger Git deploys. Prefer a folder
+// outside public_html; fall back to /data when the parent is not writable.
+define('PRIVATE_DATA_DIR', dirname(APP_ROOT) . '/lynxcom_private_data');
+function lx_storage_dir(){
+  if(!is_dir(PRIVATE_DATA_DIR)) @mkdir(PRIVATE_DATA_DIR, 0755, true);
+  return is_dir(PRIVATE_DATA_DIR) && is_writable(PRIVATE_DATA_DIR) ? PRIVATE_DATA_DIR : DATA_DIR;
+}
+define('STORAGE_DIR', lx_storage_dir());
 define('CONTENT_FILE', DATA_DIR . '/content.json');
-define('LEADS_FILE', DATA_DIR . '/leads.csv');
-define('SUPPORT_FILE', DATA_DIR . '/support.csv');
-define('TRAFFIC_FILE', DATA_DIR . '/traffic.csv');
-define('BLOG_FILE', DATA_DIR . '/blog.json');
-define('CONFIG_FILE', DATA_DIR . '/config.local.php');
+define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
+define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
+define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
+define('BLOG_FILE', STORAGE_DIR . '/blog.json');
+define('BLOG_SEED_FILE', DATA_DIR . '/blog.json');
+define('CONFIG_FILE', STORAGE_DIR . '/config.local.php');
+define('LEGACY_CONFIG_FILE', DATA_DIR . '/config.local.php');
 
 function h($v){ return htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8'); }
 function load_content(){
@@ -27,6 +37,10 @@ function check_csrf(){
 }
 function config(){
   if(file_exists(CONFIG_FILE)) return require CONFIG_FILE;
+  if(file_exists(LEGACY_CONFIG_FILE)){
+    @copy(LEGACY_CONFIG_FILE, CONFIG_FILE);
+    return require LEGACY_CONFIG_FILE;
+  }
   return [];
 }
 function admin_configured(){ $c=config(); return !empty($c['admin_password_hash']); }
@@ -61,7 +75,7 @@ function rough_location_from_ip($ip){
 }
 function append_traffic($row){
   $new = !file_exists(TRAFFIC_FILE) || filesize(TRAFFIC_FILE)===0;
-  $f=fopen(TRAFFIC_FILE,'a'); if(!$f) return false;
+  if(!is_dir(dirname(TRAFFIC_FILE))) @mkdir(dirname(TRAFFIC_FILE),0755,true); $f=fopen(TRAFFIC_FILE,'a'); if(!$f) return false;
   if($new) fputcsv($f,['created_at','page','page_title','ip','location_hint','referrer','referrer_host','utm_source','utm_medium','utm_campaign','user_agent']);
   fputcsv($f,$row); fclose($f); return true;
 }
@@ -97,6 +111,7 @@ function support_rows(){
 }
 function append_support($row){
   $new = !file_exists(SUPPORT_FILE) || filesize(SUPPORT_FILE)===0;
+  if(!is_dir(dirname(SUPPORT_FILE))) @mkdir(dirname(SUPPORT_FILE),0755,true);
   $f=fopen(SUPPORT_FILE,'a');
   if(!$f) return false;
   if($new) fputcsv($f,['created_at','ticket_id','name','phone','email','business','category','urgency','subject','message','ip','status']);
@@ -120,6 +135,7 @@ function send_html_mail($to,$subject,$html,$replyTo=''){
 
 function append_lead($row){
   $new = !file_exists(LEADS_FILE) || filesize(LEADS_FILE)===0;
+  if(!is_dir(dirname(LEADS_FILE))) @mkdir(dirname(LEADS_FILE),0755,true);
   $f=fopen(LEADS_FILE,'a');
   if(!$f) return false;
   if($new) fputcsv($f,['created_at','name','phone','email','business','service','budget','message','ip','status']);
@@ -134,6 +150,7 @@ function slugify($text){
   return $text ?: 'post-'.date('YmdHis');
 }
 function load_posts($includeDrafts=false){
+  if(!file_exists(BLOG_FILE) && file_exists(BLOG_SEED_FILE)) @copy(BLOG_SEED_FILE, BLOG_FILE);
   $json = file_exists(BLOG_FILE) ? file_get_contents(BLOG_FILE) : '[]';
   $posts = json_decode($json,true);
   if(!is_array($posts)) $posts=[];

@@ -8,6 +8,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
   else{
     $hash=password_hash($pass,PASSWORD_DEFAULT);
     $php="<?php\nreturn ['admin_password_hash' => ".var_export($hash,true)."];\n";
+    if(!is_dir(dirname(CONFIG_FILE))) @mkdir(dirname(CONFIG_FILE),0755,true);
     file_put_contents(CONFIG_FILE,$php);
     header('Location: admin/login.php?setup=done'); exit;
   }
