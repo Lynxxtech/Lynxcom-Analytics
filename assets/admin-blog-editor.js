@@ -1,24 +1,37 @@
 document.querySelectorAll('.rich-post-form').forEach((form)=>{
-  const editor=form.querySelector('.rich-editor');
+  const editorEl=form.querySelector('.wysiwyg-editor');
   const hidden=form.querySelector('.hidden-html');
   const plain=form.querySelector('.plain-content');
-  if(!editor||!hidden) return;
-  form.querySelectorAll('.editor-toolbar button').forEach((btn)=>{
-    btn.addEventListener('click',()=>{
-      editor.focus();
-      if(btn.dataset.image){
-        const url=prompt('Paste image URL or path, e.g. assets/section-process.jpg');
-        if(url){ document.execCommand('insertHTML',false,`<figure><img src="${url.replace(/"/g,'&quot;')}" alt="Blog image"><figcaption>Image caption</figcaption></figure>`); }
-        return;
+  if(!editorEl||!hidden) return;
+
+  if(window.Quill){
+    const initialHTML=editorEl.innerHTML.trim();
+    const quill=new Quill(editorEl,{
+      theme:'snow',
+      placeholder:editorEl.dataset.placeholder||'Write your blog post...',
+      modules:{
+        toolbar:[
+          [{header:[2,3,false]}],
+          ['bold','italic','underline'],
+          [{list:'ordered'},{list:'bullet'}],
+          [{align:[]}],
+          ['blockquote','link','image'],
+          ['clean']
+        ]
       }
-      const cmd=btn.dataset.cmd;
-      let value=btn.dataset.value||null;
-      if(btn.dataset.prompt){ value=prompt(btn.dataset.prompt)||''; if(!value) return; }
-      document.execCommand(cmd,false,value);
     });
-  });
+    if(initialHTML){ quill.root.innerHTML=initialHTML; }
+    form.addEventListener('submit',()=>{
+      hidden.value=quill.root.innerHTML.trim();
+      if(plain && !plain.value.trim()) plain.value=quill.getText().trim();
+    });
+    return;
+  }
+
+  // Fallback if CDN is blocked: still save editable HTML.
+  editorEl.setAttribute('contenteditable','true');
   form.addEventListener('submit',()=>{
-    hidden.value=editor.innerHTML.trim();
-    if(plain && !plain.value.trim()) plain.value=editor.innerText.trim();
+    hidden.value=editorEl.innerHTML.trim();
+    if(plain && !plain.value.trim()) plain.value=editorEl.innerText.trim();
   });
 });
