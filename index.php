@@ -2,13 +2,42 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=h($c['brand']??'Lynxcom Analytics')?> | <?=h($c['tagline']??'AI-Powered Business Dashboard & Automation Consulting')?></title><meta name="description" content="<?=h($c['subheadline']??'AI dashboards and automation consulting')?>"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/styles.css"></head>
 <body><header class="site-header"><nav class="nav wrap"><a class="brand brand-logo" href="#top"><img src="assets/lynxcom-logo.svg" alt="<?=h($c['brand']??'Lynxcom Analytics')?> logo"></a><button class="nav-toggle" aria-label="Open menu">☰</button><div class="nav-links" id="navLinks"><a href="#services">Services</a><a href="#process">Process</a><a href="#packages">Packages</a><a href="#contact" class="nav-cta">Book consultation</a></div></nav></header>
 <main id="top">
-<section class="hero-slider full-width-slider" aria-label="Lynxcom Analytics homepage slider">
-  <div class="slider-track">
-    <article class="slide active"><img src="assets/slider-dashboard.jpg" alt="Black African business team reviewing dashboard analytics"><div class="slide-copy wrap"><span>Dashboard clarity</span><h1>See your business clearly. Act faster with data.</h1><p>We turn scattered records into clear dashboards, automated workflows and smarter management decisions.</p><div class="slide-actions"><a class="btn primary" href="#services">View dashboard service</a><a class="btn glass" href="#contact">Request consultation</a></div></div></article>
-    <article class="slide"><img src="assets/slider-automation.jpg" alt="Black African entrepreneur using automation workflow tools"><div class="slide-copy wrap"><span>Workflow automation</span><h1>Reduce repetitive admin and follow-up stress.</h1><p>We map practical AI workflows for reports, reminders, customer follow-up and daily operations.</p><div class="slide-actions"><a class="btn primary" href="#services">View automation service</a><a class="btn glass" href="#process">See process</a></div></div></article>
-    <article class="slide"><img src="assets/slider-reporting.jpg" alt="Black African executives reviewing weekly business report"><div class="slide-copy wrap"><span>Management reporting</span><h1>Turn reports into decisions and next actions.</h1><p>Get weekly views that show what improved, what dropped and what needs urgent attention.</p><div class="slide-actions"><a class="btn primary" href="#packages">View reporting packages</a><a class="btn glass" href="#contact">Book consultation</a></div></div></article>
+<section class="lx-hero-carousel" aria-label="Lynxcom Analytics homepage slider">
+  <div class="lx-carousel-track">
+    <article class="lx-slide">
+      <img src="assets/slider-dashboard.jpg" alt="Black African business team reviewing dashboard analytics">
+      <div class="lx-slide-shade"></div>
+      <div class="lx-slide-content wrap">
+        <span>Dashboard clarity</span>
+        <h1>See your business clearly. Act faster with data.</h1>
+        <p>We turn scattered records into clear dashboards, automated workflows and smarter management decisions.</p>
+        <div class="lx-slide-actions"><a class="btn primary" href="#services">View dashboard service</a><a class="btn lx-glass" href="#contact">Request consultation</a></div>
+      </div>
+    </article>
+    <article class="lx-slide">
+      <img src="assets/slider-automation.jpg" alt="Black African entrepreneur using automation workflow tools">
+      <div class="lx-slide-shade"></div>
+      <div class="lx-slide-content wrap">
+        <span>Workflow automation</span>
+        <h1>Reduce repetitive admin and follow-up stress.</h1>
+        <p>We map practical AI workflows for reports, reminders, customer follow-up and daily operations.</p>
+        <div class="lx-slide-actions"><a class="btn primary" href="#services">View automation service</a><a class="btn lx-glass" href="#process">See process</a></div>
+      </div>
+    </article>
+    <article class="lx-slide">
+      <img src="assets/slider-reporting.jpg" alt="Black African executives reviewing weekly business report">
+      <div class="lx-slide-shade"></div>
+      <div class="lx-slide-content wrap">
+        <span>Management reporting</span>
+        <h1>Turn reports into decisions and next actions.</h1>
+        <p>Get weekly views that show what improved, what dropped and what needs urgent attention.</p>
+        <div class="lx-slide-actions"><a class="btn primary" href="#packages">View reporting packages</a><a class="btn lx-glass" href="#contact">Book consultation</a></div>
+      </div>
+    </article>
   </div>
-  <div class="slider-controls"><button class="slider-prev" type="button" aria-label="Previous slide">‹</button><div class="slider-dots"><button class="active" type="button" aria-label="Show dashboard slide"></button><button type="button" aria-label="Show automation slide"></button><button type="button" aria-label="Show reporting slide"></button></div><button class="slider-next" type="button" aria-label="Next slide">›</button></div>
+  <button class="lx-carousel-btn lx-prev" type="button" aria-label="Previous slide">‹</button>
+  <button class="lx-carousel-btn lx-next" type="button" aria-label="Next slide">›</button>
+  <div class="lx-carousel-dots"><button class="active" type="button" aria-label="Show slide 1"></button><button type="button" aria-label="Show slide 2"></button><button type="button" aria-label="Show slide 3"></button></div>
 </section>
 <section class="hero wrap intro-hero"><div class="hero-copy"><div class="eyebrow"><span></span><?=h($c['tagline']??'AI dashboards')?></div><h1><?=h($c['headline']??'Build a smarter business system')?></h1><p class="lead"><?=h($c['subheadline']??'We organize business data and automate repetitive reporting.')?></p><div class="hero-actions"><a class="btn primary" target="_blank" rel="noopener" href="https://wa.me/<?=$wa?>?text=Hi%2C%20I%20want%20an%20AI-powered%20dashboard%20and%20automation%20system">Chat on WhatsApp</a><a class="btn ghost" href="#contact">Request consultation</a></div><div class="trust-row"><?php foreach(array_slice($c['industries']??[],0,5) as $i): ?><span><?=h($i)?></span><?php endforeach; ?></div></div><div class="hero-panel"><div class="panel-top"><span></span><span></span><span></span><b>Business Command Center</b></div><div class="metric-grid"><div class="metric"><small>Revenue tracked</small><strong>₦24.8M</strong><em>+18% this month</em></div><div class="metric"><small>Follow-ups due</small><strong>42</strong><em>High priority</em></div><div class="metric"><small>Manual hours saved</small><strong>16h</strong><em>Weekly estimate</em></div></div><div class="chart-card"><div class="bars"><i style="height:45%"></i><i style="height:72%"></i><i style="height:52%"></i><i style="height:88%"></i><i style="height:64%"></i><i style="height:94%"></i></div></div><div class="task-list"><p><span class="check">✓</span> Weekly report generated</p><p><span class="check">✓</span> Customer list cleaned</p><p><span class="warn">!</span> 12 inactive customers need action</p></div></div></section>
 <section class="section wrap" id="services"><div class="section-head"><span class="kicker">What we do</span><h2>One broad service for business clarity and operational speed.</h2><p>We combine dashboards, reporting systems and AI automation consulting into a practical service that makes operations easier to manage.</p></div><div class="cards six"><?php foreach($c['services']??[] as $s): ?><article class="card"><span class="icon"><?=h($s['icon']??'•')?></span><h3><?=h($s['title']??'Service')?></h3><p><?=h($s['body']??'')?></p></article><?php endforeach; ?></div></section>
