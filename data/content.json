@@ -1,0 +1,97 @@
+{
+  "brand": "SmartOps AI Solutions",
+  "tagline": "AI-Powered Business Dashboard & Automation Consulting",
+  "headline": "Turn scattered business records into dashboards, automation and clear decisions.",
+  "subheadline": "We help growing businesses organize their data, track performance, automate repetitive reporting, and know exactly what needs attention every week.",
+  "phone_primary": "08136377667",
+  "phone_secondary": "07060630333",
+  "whatsapp": "2348136377667",
+  "email": "hello@yourdomain.com",
+  "services": [
+    {
+      "icon": "📊",
+      "title": "Business dashboards",
+      "body": "Google Sheets, Excel, Looker Studio or private web dashboards for sales, revenue, customers, staff, inventory and projects."
+    },
+    {
+      "icon": "🎯",
+      "title": "KPI & reporting systems",
+      "body": "Define the numbers that matter, track them clearly, and generate daily, weekly or monthly management reports."
+    },
+    {
+      "icon": "🧹",
+      "title": "Data cleanup",
+      "body": "Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data."
+    },
+    {
+      "icon": "🤖",
+      "title": "AI workflow audit",
+      "body": "Identify repetitive admin tasks, reporting delays, communication gaps and where AI can reduce manual work."
+    },
+    {
+      "icon": "⚙️",
+      "title": "Automation strategy",
+      "body": "Design workflows for reminders, customer follow-up, reports, forms, staff updates, email/SMS/WhatsApp sequences and management alerts."
+    },
+    {
+      "icon": "📈",
+      "title": "Management insights",
+      "body": "Turn raw data into action: what improved, what dropped, who needs follow-up, and what decision should be made next."
+    }
+  ],
+  "packages": [
+    {
+      "name": "Starter",
+      "title": "Dashboard & Automation Audit",
+      "price": "₦75k–₦150k",
+      "items": [
+        "Business process review",
+        "Simple KPI list",
+        "Data cleanup",
+        "Basic Excel/Google Sheet dashboard",
+        "Automation opportunity report"
+      ]
+    },
+    {
+      "name": "Most popular",
+      "title": "Growth Dashboard & Workflow System",
+      "price": "₦200k–₦500k",
+      "featured": true,
+      "items": [
+        "Full KPI dashboard",
+        "Customer/staff/payment tracker",
+        "Reporting templates",
+        "Workflow automation plan",
+        "Weekly management report format",
+        "Training/support session"
+      ]
+    },
+    {
+      "name": "Premium",
+      "title": "AI Operations System",
+      "price": "₦600k–₦1.5m+",
+      "items": [
+        "Advanced dashboard",
+        "Multi-department tracking",
+        "Customer follow-up system",
+        "Automated reporting workflow",
+        "AI workflow documentation",
+        "Monthly review structure"
+      ]
+    }
+  ],
+  "industries": [
+    "SMEs",
+    "Schools",
+    "Churches",
+    "NGOs",
+    "Clinics",
+    "Restaurants",
+    "Real estate firms",
+    "Sales teams",
+    "Fintech/POS agents",
+    "Cooperatives",
+    "Training centers",
+    "Ecommerce brands"
+  ]
+}
