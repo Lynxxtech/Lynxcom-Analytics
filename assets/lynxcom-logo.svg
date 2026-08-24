@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="72" viewBox="0 0 260 72" role="img" aria-label="Lynxcom Analytics logo">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#08275c"/>
+      <stop offset="0.55" stop-color="#1455d9"/>
+      <stop offset="1" stop-color="#14b8d4"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="6" width="60" height="60" rx="14" fill="url(#g)"/>
+  <path d="M17 45V21h7v18h19v6H17Z" fill="#fff"/>
+  <path d="M27 39l8-13 8 13h-6l-2-4-2 4h-6Z" fill="#f8c14a"/>
+  <text x="74" y="32" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" fill="#061b31">Lynxcom</text>
+  <text x="74" y="54" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" fill="#1455d9">Analytics</text>
+</svg>
