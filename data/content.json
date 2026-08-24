@@ -1,8 +1,8 @@
 {
   "brand": "Lynxcom Analytics",
-  "tagline": "AI-Powered Business Dashboard & Automation Consulting",
-  "headline": "Turn scattered records into clear dashboards and smarter workflows.",
-  "subheadline": "We help businesses turn scattered records and repetitive tasks into clear dashboards, automated workflows, and smarter management decisions.",
+  "tagline": "AI Automation Agency in Nigeria for Business Dashboards & Workflow Automation",
+  "headline": "AI automation agency in Nigeria for dashboards, reporting and smarter workflows.",
+  "subheadline": "Lynxcom Analytics helps Nigerian businesses build KPI dashboards, data analytics reports, Excel/Google Sheets automation, Power BI consulting and customer follow-up workflows.",
   "phone_primary": "08136377667",
   "phone_secondary": "07060630333",
   "whatsapp": "2348136377667",
@@ -10,33 +10,33 @@
   "services": [
     {
       "icon": "📊",
-      "title": "Business dashboards",
-      "body": "Google Sheets, Excel, Looker Studio or private web dashboards for sales, revenue, customers, staff, inventory and projects."
+      "title": "Business dashboard consulting Nigeria",
+      "body": "KPI dashboards, sales dashboards and business reporting systems for Nigerian SMEs using Excel, Google Sheets, Looker Studio, Power BI or private web dashboards."
     },
     {
       "icon": "🎯",
-      "title": "KPI & reporting systems",
-      "body": "Define the numbers that matter, track them clearly, and generate daily, weekly or monthly management reports."
+      "title": "KPI & management reporting systems",
+      "body": "Define the numbers that matter, track them clearly, and generate daily, weekly or monthly management reports for better decisions."
     },
     {
       "icon": "🧹",
-      "title": "Data cleanup",
-      "body": "Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data."
+      "title": "Data cleaning services Nigeria",
+      "body": "Clean messy spreadsheets, remove duplicates, merge customer records, structure business data and prepare reliable reporting data."
     },
     {
       "icon": "🤖",
-      "title": "AI workflow audit",
-      "body": "Identify repetitive admin tasks, reporting delays, communication gaps and where AI can reduce manual work."
+      "title": "AI automation consulting for small businesses",
+      "body": "Identify repetitive admin tasks, reporting delays, customer follow-up gaps and practical AI automation opportunities."
     },
     {
       "icon": "⚙️",
-      "title": "Automation strategy",
+      "title": "Workflow automation services Nigeria",
       "body": "Design workflows for reminders, customer follow-up, reports, forms, staff updates, email/SMS/WhatsApp sequences and management alerts."
     },
     {
       "icon": "📈",
-      "title": "Management insights",
-      "body": "Turn raw data into action: what improved, what dropped, who needs follow-up, and what decision should be made next."
+      "title": "Power BI, Excel & Google Sheets dashboard setup",
+      "body": "Turn raw data into action-ready insights using Power BI dashboards, Excel dashboards, Google Sheets automation and Looker Studio reports."
     }
   ],
   "packages": [
