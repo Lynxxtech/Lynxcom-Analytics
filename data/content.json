@@ -1,42 +1,42 @@
 {
   "brand": "Lynxcom Analytics",
-  "tagline": "AI-Powered Dashboards, Reporting & Automation Systems",
-  "headline": "See your business clearly. Automate the work that slows you down.",
-  "subheadline": "Lynxcom Analytics helps businesses transform scattered spreadsheets, manual reports and repetitive tasks into secure dashboards, reporting systems and practical automation workflows.",
+  "tagline": "AI-Powered Business Dashboard & Automation Consulting",
+  "headline": "Turn scattered records into clear dashboards and smarter workflows.",
+  "subheadline": "We help businesses turn scattered records and repetitive tasks into clear dashboards, automated workflows, and smarter management decisions.",
   "phone_primary": "08136377667",
   "phone_secondary": "07060630333",
   "whatsapp": "2348136377667",
   "email": "hello@lynxcomanalytics.com",
   "services": [
     {
-      "icon": "01",
-      "title": "Executive dashboards",
-      "body": "Clean KPI dashboards for sales, customers, revenue, staff, inventory, projects and operational performance."
+      "icon": "📊",
+      "title": "Business dashboards",
+      "body": "Google Sheets, Excel, Looker Studio or private web dashboards for sales, revenue, customers, staff, inventory and projects."
     },
     {
-      "icon": "02",
-      "title": "Reporting systems",
-      "body": "Daily, weekly and monthly reporting structures that show what improved, what dropped and what requires action."
+      "icon": "🎯",
+      "title": "KPI & reporting systems",
+      "body": "Define the numbers that matter, track them clearly, and generate daily, weekly or monthly management reports."
     },
     {
-      "icon": "03",
-      "title": "Data cleanup & structure",
-      "body": "We clean messy Excel/CSV/Google Sheets records, remove duplicates and prepare data for reliable decision-making."
+      "icon": "🧹",
+      "title": "Data cleanup",
+      "body": "Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data."
     },
     {
-      "icon": "04",
+      "icon": "🤖",
       "title": "AI workflow audit",
-      "body": "We review repetitive admin, reporting and follow-up tasks to identify where AI and automation can save time."
+      "body": "Identify repetitive admin tasks, reporting delays, communication gaps and where AI can reduce manual work."
     },
     {
-      "icon": "05",
-      "title": "Workflow automation planning",
-      "body": "We design practical workflows for reminders, forms, reports, customer follow-up, email/SMS/WhatsApp sequences and alerts."
+      "icon": "⚙️",
+      "title": "Automation strategy",
+      "body": "Design workflows for reminders, customer follow-up, reports, forms, staff updates, email/SMS/WhatsApp sequences and management alerts."
     },
     {
-      "icon": "06",
-      "title": "Management action system",
-      "body": "We turn reports into next actions: who to call, what to fix, where the business is leaking value and what to do next."
+      "icon": "📈",
+      "title": "Management insights",
+      "body": "Turn raw data into action: what improved, what dropped, who needs follow-up, and what decision should be made next."
     }
   ],
   "packages": [
