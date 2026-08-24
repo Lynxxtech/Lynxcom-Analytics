@@ -149,8 +149,41 @@ function slugify($text){
   $text = trim($text,'-');
   return $text ?: 'post-'.date('YmdHis');
 }
+
+function sync_seed_blog_posts(){
+  if(!file_exists(BLOG_SEED_FILE)) return;
+  $seed = json_decode(file_get_contents(BLOG_SEED_FILE), true);
+  if(!is_array($seed)) return;
+  $live = file_exists(BLOG_FILE) ? json_decode(file_get_contents(BLOG_FILE), true) : [];
+  if(!is_array($live)) $live=[];
+  $changed=false;
+  $liveById=[];
+  foreach($live as $i=>$p){ if(!empty($p['id'])) $liveById[$p['id']]=$i; }
+  foreach($seed as $sp){
+    if(empty($sp['id'])) continue;
+    $sid=$sp['id'];
+    if(!array_key_exists($sid,$liveById)){
+      $live[]=$sp; $changed=true; continue;
+    }
+    $i=$liveById[$sid];
+    $liveDate=$live[$i]['updated_at'] ?? '';
+    $seedDate=$sp['updated_at'] ?? '';
+    $liveVersion=$live[$i]['seed_version'] ?? '';
+    $seedVersion=$sp['seed_version'] ?? '';
+    if(($seedDate && strcmp($seedDate,$liveDate)>0) || ($seedVersion && $seedVersion!==$liveVersion)){
+      // Update only matching seeded posts. Admin-created posts with other IDs are preserved.
+      $live[$i]=$sp; $changed=true;
+    }
+  }
+  if($changed){
+    if(!is_dir(dirname(BLOG_FILE))) @mkdir(dirname(BLOG_FILE),0755,true);
+    @file_put_contents(BLOG_FILE, json_encode(array_values($live), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+  }
+}
+
 function load_posts($includeDrafts=false){
   if(!file_exists(BLOG_FILE) && file_exists(BLOG_SEED_FILE)) @copy(BLOG_SEED_FILE, BLOG_FILE);
+  sync_seed_blog_posts();
   $json = file_exists(BLOG_FILE) ? file_get_contents(BLOG_FILE) : '[]';
   $posts = json_decode($json,true);
   if(!is_array($posts)) $posts=[];
