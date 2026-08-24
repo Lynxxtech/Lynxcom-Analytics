@@ -1,0 +1,1 @@
+<?php require __DIR__.'/../includes/functions.php'; require_admin(); header('Content-Type: text/csv'); header('Content-Disposition: attachment; filename=leads.csv'); readfile(LEADS_FILE); ?>
