@@ -5,6 +5,7 @@ define('DATA_DIR', APP_ROOT . '/data');
 define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', DATA_DIR . '/leads.csv');
 define('SUPPORT_FILE', DATA_DIR . '/support.csv');
+define('TRAFFIC_FILE', DATA_DIR . '/traffic.csv');
 define('BLOG_FILE', DATA_DIR . '/blog.json');
 define('CONFIG_FILE', DATA_DIR . '/config.local.php');
 
@@ -38,6 +39,53 @@ function lead_rows(){
   $head=fgetcsv($f); $rows=[];
   while(($r=fgetcsv($f))!==false){ $rows[]=array_combine($head,$r); }
   fclose($f); return array_reverse($rows);
+}
+
+
+function client_ip(){
+  $keys=['HTTP_CF_CONNECTING_IP','HTTP_X_FORWARDED_FOR','HTTP_X_REAL_IP','REMOTE_ADDR'];
+  foreach($keys as $k){
+    if(!empty($_SERVER[$k])){
+      $v=explode(',',$_SERVER[$k])[0];
+      return trim($v);
+    }
+  }
+  return '';
+}
+function rough_location_from_ip($ip){
+  if(!$ip) return 'Unknown';
+  if(filter_var($ip,FILTER_VALIDATE_IP,FILTER_FLAG_NO_PRIV_RANGE|FILTER_FLAG_NO_RES_RANGE)===false) return 'Local/Private';
+  $prefix=substr($ip,0,strpos($ip,'.')?:0);
+  // Lightweight offline hint only; detailed location needs a GeoIP database or API.
+  return $prefix ? 'IP prefix '.$prefix : 'Unknown';
+}
+function append_traffic($row){
+  $new = !file_exists(TRAFFIC_FILE) || filesize(TRAFFIC_FILE)===0;
+  $f=fopen(TRAFFIC_FILE,'a'); if(!$f) return false;
+  if($new) fputcsv($f,['created_at','page','page_title','ip','location_hint','referrer','referrer_host','utm_source','utm_medium','utm_campaign','user_agent']);
+  fputcsv($f,$row); fclose($f); return true;
+}
+function track_visit($pageTitle=''){
+  if(php_sapi_name()==='cli') return;
+  $ua=$_SERVER['HTTP_USER_AGENT']??'';
+  if(preg_match('/bot|crawl|spider|slurp|mediapartners|facebookexternalhit|preview/i',$ua)) return;
+  $uri=$_SERVER['REQUEST_URI']??'';
+  if(preg_match('/\.(css|js|jpg|jpeg|png|gif|svg|webp|ico|xml|txt)$/i',$uri)) return;
+  $ip=client_ip(); $ref=$_SERVER['HTTP_REFERER']??''; $host='';
+  if($ref){ $parts=parse_url($ref); $host=$parts['host']??''; }
+  $row=[date('c'),$uri,$pageTitle,$ip,rough_location_from_ip($ip),$ref,$host,$_GET['utm_source']??'',$_GET['utm_medium']??'',$_GET['utm_campaign']??'',$ua];
+  append_traffic($row);
+}
+function traffic_rows($limit=1000){
+  if(!file_exists(TRAFFIC_FILE)) return [];
+  $f=fopen(TRAFFIC_FILE,'r'); if(!$f) return [];
+  $head=fgetcsv($f); $rows=[];
+  while(($r=fgetcsv($f))!==false){ if(count($r)==count($head)) $rows[]=array_combine($head,$r); }
+  fclose($f); $rows=array_reverse($rows); return array_slice($rows,0,$limit);
+}
+function traffic_summary($rows,$key,$limit=10){
+  $out=[]; foreach($rows as $r){ $v=trim($r[$key]??''); if($v==='') $v='Direct / none'; $out[$v]=($out[$v]??0)+1; }
+  arsort($out); return array_slice($out,0,$limit,true);
 }
 
 function support_rows(){
