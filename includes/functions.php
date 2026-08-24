@@ -4,6 +4,7 @@ define('APP_ROOT', dirname(__DIR__));
 define('DATA_DIR', APP_ROOT . '/data');
 define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', DATA_DIR . '/leads.csv');
+define('SUPPORT_FILE', DATA_DIR . '/support.csv');
 define('BLOG_FILE', DATA_DIR . '/blog.json');
 define('CONFIG_FILE', DATA_DIR . '/config.local.php');
 
@@ -38,6 +39,37 @@ function lead_rows(){
   while(($r=fgetcsv($f))!==false){ $rows[]=array_combine($head,$r); }
   fclose($f); return array_reverse($rows);
 }
+
+function support_rows(){
+  if(!file_exists(SUPPORT_FILE)) return [];
+  $f=fopen(SUPPORT_FILE,'r'); if(!$f) return [];
+  $head=fgetcsv($f); $rows=[];
+  while(($r=fgetcsv($f))!==false){ if(count($r)==count($head)) $rows[]=array_combine($head,$r); }
+  fclose($f); return array_reverse($rows);
+}
+function append_support($row){
+  $new = !file_exists(SUPPORT_FILE) || filesize(SUPPORT_FILE)===0;
+  $f=fopen(SUPPORT_FILE,'a');
+  if(!$f) return false;
+  if($new) fputcsv($f,['created_at','ticket_id','name','phone','email','business','category','urgency','subject','message','ip','status']);
+  fputcsv($f,$row);
+  fclose($f); return true;
+}
+function send_html_mail($to,$subject,$html,$replyTo=''){
+  $to = trim(str_replace(["\r","\n"],' ',(string)$to));
+  $subject = trim(str_replace(["\r","\n"],' ',(string)$subject));
+  $replyTo = trim(str_replace(["\r","\n"],' ',(string)$replyTo));
+  if(!$to || !filter_var($to,FILTER_VALIDATE_EMAIL)) return false;
+  $from = 'hello@lynxcomanalytics.com';
+  $headers = "MIME-Version: 1.0\r\n";
+  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+  $headers .= "From: Lynxcom Analytics <{$from}>\r\n";
+  if($replyTo && filter_var($replyTo,FILTER_VALIDATE_EMAIL)) $headers .= "Reply-To: {$replyTo}\r\n";
+  $ok=@mail($to,$subject,$html,$headers);
+  @file_put_contents(DATA_DIR.'/mail.log', date('c').' | '.($ok?'sent':'failed').' | '.$to.' | '.$subject."\n", FILE_APPEND);
+  return $ok;
+}
+
 function append_lead($row){
   $new = !file_exists(LEADS_FILE) || filesize(LEADS_FILE)===0;
   $f=fopen(LEADS_FILE,'a');
