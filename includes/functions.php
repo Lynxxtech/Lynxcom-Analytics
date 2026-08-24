@@ -71,6 +71,33 @@ function find_post($slug,$includeDrafts=false){
   foreach(load_posts($includeDrafts) as $p){ if(($p['slug']??'')===$slug) return $p; }
   return null;
 }
+
+function clean_html($html){
+  $html = (string)$html;
+  $allowed = '<p><br><strong><b><em><i><u><ul><ol><li><h2><h3><blockquote><a><img><figure><figcaption>';
+  $html = strip_tags($html, $allowed);
+  $html = preg_replace('/\s+on\w+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i','',$html);
+  $html = preg_replace('/javascript\s*:/i','',$html);
+  $html = preg_replace('/<a\s+/i','<a target="_blank" rel="noopener" ',$html);
+  $html = preg_replace('/<img([^>]*?)>/i','<img$1 loading="lazy">',$html);
+  return trim($html);
+}
+function post_body_html($post){
+  if(!empty($post['content_html'])) return clean_html($post['content_html']);
+  $paras = preg_split('/\n\s*\n/', trim($post['content']??''));
+  $out=''; foreach($paras as $para){ if(trim($para)!=='') $out.='<p>'.h($para).'</p>'; }
+  return $out;
+}
+function cover_image($post){
+  $img = trim($post['cover_image'] ?? '');
+  return $img ?: 'assets/section-services.jpg';
+}
+function public_media_url($path){
+  $path = trim((string)$path);
+  if(preg_match('/^https?:\/\//i',$path)) return $path;
+  return 'https://lynxcomanalytics.com/' . ltrim($path,'/');
+}
+
 function excerpt($text,$max=170){
   $text = trim(preg_replace('/\s+/', ' ', strip_tags((string)$text)));
   return strlen($text)>$max ? substr($text,0,$max-1).'…' : $text;

@@ -14,23 +14,27 @@ if($action==='delete'){
 $title=safe_text('title',180);
 $summary=safe_text('summary',360);
 $content=safe_text('content',20000);
+$content_html=clean_html($_POST['content_html']??'');
 $keywords=safe_text('keywords',500);
+$cover=safe_text('cover_image',500);
+$cover_alt=safe_text('cover_alt',220);
 $status=($_POST['status']??'published')==='draft'?'draft':'published';
-if($title==='' || $content===''){
+if($title==='' || ($content==='' && $content_html==='')){
   $_SESSION['flash']='Blog title and content are required.';
   header('Location: index.php#blog'); exit;
 }
+if($content==='') $content=trim(strip_tags($content_html));
 $slug=slugify($_POST['slug']??$title);
 $now=date('Y-m-d');
 $found=false;
 foreach($posts as &$p){
   if(($p['id']??'')===$id && $id!==''){
-    $p['title']=$title; $p['slug']=$slug; $p['summary']=$summary ?: excerpt($content,170); $p['content']=$content; $p['keywords']=$keywords; $p['status']=$status; $p['updated_at']=$now; if(empty($p['created_at'])) $p['created_at']=$now; $found=true; break;
+    $p['title']=$title; $p['slug']=$slug; $p['summary']=$summary ?: excerpt($content,170); $p['content']=$content; $p['content_html']=$content_html; $p['keywords']=$keywords; $p['cover_image']=$cover ?: 'assets/section-services.jpg'; $p['cover_alt']=$cover_alt ?: $title; $p['status']=$status; $p['updated_at']=$now; if(empty($p['created_at'])) $p['created_at']=$now; $found=true; break;
   }
 }
 unset($p);
 if(!$found){
-  $posts[]=['id'=>'post_'.date('Ymd_His'),'title'=>$title,'slug'=>$slug,'summary'=>$summary ?: excerpt($content,170),'content'=>$content,'keywords'=>$keywords,'status'=>$status,'created_at'=>$now,'updated_at'=>$now];
+  $posts[]=['id'=>'post_'.date('Ymd_His'),'title'=>$title,'slug'=>$slug,'summary'=>$summary ?: excerpt($content,170),'content'=>$content,'content_html'=>$content_html,'keywords'=>$keywords,'cover_image'=>$cover ?: 'assets/section-services.jpg','cover_alt'=>$cover_alt ?: $title,'status'=>$status,'created_at'=>$now,'updated_at'=>$now];
 }
 save_posts($posts);
 $_SESSION['flash']='Blog post saved.';

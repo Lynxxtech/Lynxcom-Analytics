@@ -8,7 +8,10 @@
     "keywords": "business dashboards, weekly reports, management reporting, KPI dashboards, Nigeria business reporting",
     "status": "published",
     "created_at": "2026-08-24",
-    "updated_at": "2026-08-24"
+    "updated_at": "2026-08-24",
+    "cover_image": "assets/section-process.jpg",
+    "cover_alt": "How to Turn Scattered Business Records Into Clear Weekly Reports",
+    "content_html": "<p>Many businesses already have useful records, but the information is often scattered across notebooks, spreadsheets, staff updates, sales exports and customer lists. The problem is not always lack of data; it is lack of structure.</p><p>A good weekly reporting system starts by deciding the numbers that matter most: sales, revenue, new customers, repeat customers, pending follow-ups, staff activities and outstanding issues. Once those numbers are clear, the business can organize records into a simple dashboard that shows what improved, what dropped and what needs attention.</p><p>The goal is not to make reporting complicated. The goal is to help owners and managers make better decisions faster. A practical dashboard should answer three questions every week: what happened, why did it happen and what should we do next?</p>"
   },
   {
     "id": "post_20260824_002",
@@ -19,7 +22,10 @@
     "keywords": "customer follow-up, workflow automation, business automation, sales follow-up, Nigeria SMEs",
     "status": "published",
     "created_at": "2026-08-24",
-    "updated_at": "2026-08-24"
+    "updated_at": "2026-08-24",
+    "cover_image": "assets/section-services.jpg",
+    "cover_alt": "Why Customer Follow-Up Systems Help Businesses Recover Lost Sales",
+    "content_html": "<p>Many businesses lose sales because follow-up is not consistent. A customer asks a question, makes an enquiry, delays payment or stops buying, but nobody follows up at the right time. Over time, these small gaps become lost revenue.</p><p>A customer follow-up system helps the business know who needs attention, when to contact them and what message should be sent. It can be as simple as a structured list, a weekly follow-up dashboard or a workflow that reminds the team what to do next.</p><p>The best follow-up systems are not aggressive. They are organized, respectful and useful. They help the business stay close to customers while giving management a clear view of pending opportunities.</p>"
   },
   {
     "id": "post_20260824_003",
@@ -30,6 +36,9 @@
     "keywords": "business dashboard, dashboard consulting, data cleanup, reporting system, KPI tracking",
     "status": "published",
     "created_at": "2026-08-24",
-    "updated_at": "2026-08-24"
+    "updated_at": "2026-08-24",
+    "cover_image": "assets/section-security.jpg",
+    "cover_alt": "What Business Owners Should Check Before Building a Dashboard",
+    "content_html": "<p>A dashboard is useful only when it answers the right business questions. Before building one, business owners should first ask what decisions they want to make more clearly. Do they need to track sales? Customer activity? Staff performance? Payments? Inventory? Projects?</p><p>The next step is to check where the records currently live. Some records may be in spreadsheets, sales reports, forms, PDFs or staff updates. These records need to be cleaned and structured before they can produce reliable reports.</p><p>Finally, the business should decide how often reports are needed. Some teams need daily visibility, while others only need weekly or monthly reporting. The right dashboard should match the way the business actually works.</p>"
   }
 ]
