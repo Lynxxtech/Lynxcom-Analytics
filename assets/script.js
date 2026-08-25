@@ -32,3 +32,10 @@ lxDots.forEach((dot,i)=>dot.addEventListener('click',()=>{lxShow(i);lxStart();})
 lxPrev?.addEventListener('click',()=>{lxShow(lxCurrent-1);lxStart();});
 lxNext?.addEventListener('click',()=>{lxShow(lxCurrent+1);lxStart();});
 if(lxSlides.length){lxShow(0);lxStart();}
+
+const siteHeader=document.querySelector('.site-header');
+function updateStickyHeaderShadow(){
+  if(siteHeader) siteHeader.classList.toggle('is-scrolled', window.scrollY>12);
+}
+updateStickyHeaderShadow();
+window.addEventListener('scroll', updateStickyHeaderShadow, {passive:true});
