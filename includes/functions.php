@@ -88,19 +88,33 @@ function save_geo_cache($cache){
 }
 function geo_location_from_ip($ip){
   $fallback=['country'=>'Unknown','region'=>'','city'=>'','location'=>'Unknown','source'=>'fallback'];
-  if(!is_public_ip($ip)) return ['country'=>'Local/Private','region'=>'','city'=>'','location'=>'Local/Private','source'=>'local'];
+  if(!is_public_ip($ip)) return ['country'=>'Local/Private','region'=>'','city'=>'','location'=>'Local/Private','source'=>'local','lookup_at'=>date('c')];
   $cache=geo_cache();
-  if(isset($cache[$ip]) && !empty($cache[$ip]['lookup_at']) && strtotime($cache[$ip]['lookup_at']) > time()-86400*30) return $cache[$ip];
-  $url='http://ip-api.com/json/'.rawurlencode($ip).'?fields=status,country,regionName,city,query';
-  $ctx=stream_context_create(['http'=>['timeout'=>1.8,'user_agent'=>'LynxcomAnalyticsTrafficTracker/1.0']]);
-  $raw=@file_get_contents($url,false,$ctx);
-  if($raw){
-    $d=json_decode($raw,true);
-    if(is_array($d) && ($d['status']??'')==='success'){
+  if(isset($cache[$ip]) && !empty($cache[$ip]['lookup_at'])){
+    $age=time()-strtotime($cache[$ip]['lookup_at']);
+    $src=$cache[$ip]['source']??'';
+    $maxAge=in_array($src,['ipwho.is','ip-api'],true) ? 86400*30 : 3600;
+    if($age>=0 && $age<$maxAge) return $cache[$ip];
+  }
+  $ctx=stream_context_create(['http'=>['timeout'=>3.0,'user_agent'=>'LynxcomAnalyticsTrafficTracker/1.0']]);
+  $providers=[
+    ['source'=>'ipwho.is','url'=>'https://ipwho.is/'.rawurlencode($ip),'parser'=>function($d){
+      if(!is_array($d) || empty($d['success'])) return null;
+      $parts=array_values(array_filter([$d['city']??'', $d['region']??'', $d['country']??'']));
+      return ['country'=>$d['country']??'Unknown','region'=>$d['region']??'','city'=>$d['city']??'','location'=>$parts?implode(', ',$parts):'Unknown','source'=>'ipwho.is','lookup_at'=>date('c')];
+    }],
+    ['source'=>'ip-api','url'=>'http://ip-api.com/json/'.rawurlencode($ip).'?fields=status,country,regionName,city,query','parser'=>function($d){
+      if(!is_array($d) || ($d['status']??'')!=='success') return null;
       $parts=array_values(array_filter([$d['city']??'', $d['regionName']??'', $d['country']??'']));
-      $geo=['country'=>$d['country']??'Unknown','region'=>$d['regionName']??'','city'=>$d['city']??'','location'=>$parts?implode(', ',$parts):'Unknown','source'=>'ip-api','lookup_at'=>date('c')];
-      $cache[$ip]=$geo; save_geo_cache($cache); return $geo;
-    }
+      return ['country'=>$d['country']??'Unknown','region'=>$d['regionName']??'','city'=>$d['city']??'','location'=>$parts?implode(', ',$parts):'Unknown','source'=>'ip-api','lookup_at'=>date('c')];
+    }]
+  ];
+  foreach($providers as $provider){
+    $raw=@file_get_contents($provider['url'],false,$ctx);
+    if(!$raw) continue;
+    $d=json_decode($raw,true);
+    $geo=$provider['parser']($d);
+    if($geo){ $cache[$ip]=$geo; save_geo_cache($cache); return $geo; }
   }
   $fallback['location']=rough_location_from_ip($ip); $fallback['lookup_at']=date('c'); $cache[$ip]=$fallback; save_geo_cache($cache); return $fallback;
 }
