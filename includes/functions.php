@@ -14,6 +14,8 @@ define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
 define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
 define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
+define('BLOG_VIEWS_FILE', STORAGE_DIR . '/blog_views.csv');
+define('GEO_CACHE_FILE', STORAGE_DIR . '/geo_cache.json');
 define('BLOG_FILE', STORAGE_DIR . '/blog.json');
 define('BLOG_SEED_FILE', DATA_DIR . '/blog.json');
 define('CONFIG_FILE', STORAGE_DIR . '/config.local.php');
@@ -70,16 +72,80 @@ function rough_location_from_ip($ip){
   if(!$ip) return 'Unknown';
   if(filter_var($ip,FILTER_VALIDATE_IP,FILTER_FLAG_NO_PRIV_RANGE|FILTER_FLAG_NO_RES_RANGE)===false) return 'Local/Private';
   $prefix=substr($ip,0,strpos($ip,'.')?:0);
-  // Lightweight offline hint only; detailed location needs a GeoIP database or API.
   return $prefix ? 'IP prefix '.$prefix : 'Unknown';
 }
+function is_public_ip($ip){
+  return $ip && filter_var($ip,FILTER_VALIDATE_IP,FILTER_FLAG_NO_PRIV_RANGE|FILTER_FLAG_NO_RES_RANGE)!==false;
+}
+function geo_cache(){
+  if(!file_exists(GEO_CACHE_FILE)) return [];
+  $j=json_decode(@file_get_contents(GEO_CACHE_FILE),true);
+  return is_array($j)?$j:[];
+}
+function save_geo_cache($cache){
+  if(!is_dir(dirname(GEO_CACHE_FILE))) @mkdir(dirname(GEO_CACHE_FILE),0755,true);
+  @file_put_contents(GEO_CACHE_FILE,json_encode($cache,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
+}
+function geo_location_from_ip($ip){
+  $fallback=['country'=>'Unknown','region'=>'','city'=>'','location'=>'Unknown','source'=>'fallback'];
+  if(!is_public_ip($ip)) return ['country'=>'Local/Private','region'=>'','city'=>'','location'=>'Local/Private','source'=>'local'];
+  $cache=geo_cache();
+  if(isset($cache[$ip]) && !empty($cache[$ip]['lookup_at']) && strtotime($cache[$ip]['lookup_at']) > time()-86400*30) return $cache[$ip];
+  $url='http://ip-api.com/json/'.rawurlencode($ip).'?fields=status,country,regionName,city,query';
+  $ctx=stream_context_create(['http'=>['timeout'=>1.8,'user_agent'=>'LynxcomAnalyticsTrafficTracker/1.0']]);
+  $raw=@file_get_contents($url,false,$ctx);
+  if($raw){
+    $d=json_decode($raw,true);
+    if(is_array($d) && ($d['status']??'')==='success'){
+      $parts=array_values(array_filter([$d['city']??'', $d['regionName']??'', $d['country']??'']));
+      $geo=['country'=>$d['country']??'Unknown','region'=>$d['regionName']??'','city'=>$d['city']??'','location'=>$parts?implode(', ',$parts):'Unknown','source'=>'ip-api','lookup_at'=>date('c')];
+      $cache[$ip]=$geo; save_geo_cache($cache); return $geo;
+    }
+  }
+  $fallback['location']=rough_location_from_ip($ip); $fallback['lookup_at']=date('c'); $cache[$ip]=$fallback; save_geo_cache($cache); return $fallback;
+}
+function csv_read_assoc_compat($file){
+  if(!file_exists($file)) return [];
+  $f=fopen($file,'r'); if(!$f) return [];
+  $head=fgetcsv($f); if(!$head){ fclose($f); return []; }
+  $rows=[];
+  while(($r=fgetcsv($f))!==false){
+    $row=[];
+    foreach($head as $i=>$h){ $row[$h]=$r[$i]??''; }
+    $rows[]=$row;
+  }
+  fclose($f); return $rows;
+}
+function ensure_csv_header($file,$header){
+  if(!is_dir(dirname($file))) @mkdir(dirname($file),0755,true);
+  if(!file_exists($file) || filesize($file)===0){ $f=fopen($file,'w'); fputcsv($f,$header); fclose($f); return; }
+  $f=fopen($file,'r'); $old=fgetcsv($f); fclose($f);
+  if($old===$header) return;
+  $rows=csv_read_assoc_compat($file);
+  $tmp=$file.'.tmp'; $out=fopen($tmp,'w'); fputcsv($out,$header);
+  foreach($rows as $r){ $line=[]; foreach($header as $h){ $line[]=$r[$h]??''; } fputcsv($out,$line); }
+  fclose($out); @rename($tmp,$file);
+}
 function append_traffic($row){
-  $new = !file_exists(TRAFFIC_FILE) || filesize(TRAFFIC_FILE)===0;
-  if(!is_dir(dirname(TRAFFIC_FILE))) @mkdir(dirname(TRAFFIC_FILE),0755,true); $f=fopen(TRAFFIC_FILE,'a'); if(!$f) return false;
-  if($new) fputcsv($f,['created_at','page','page_title','ip','location_hint','referrer','referrer_host','utm_source','utm_medium','utm_campaign','user_agent']);
+  $header=['created_at','page','page_title','ip','location_hint','country','region','city','geo_source','post_slug','referrer','referrer_host','utm_source','utm_medium','utm_campaign','user_agent'];
+  ensure_csv_header(TRAFFIC_FILE,$header);
+  $f=fopen(TRAFFIC_FILE,'a'); if(!$f) return false;
   fputcsv($f,$row); fclose($f); return true;
 }
-function track_visit($pageTitle=''){
+function visitor_hash($ip,$ua,$slug=''){
+  $salt='lynxcom-analytics-v1';
+  return hash('sha256',$salt.'|'.$slug.'|'.$ip.'|'.$ua);
+}
+function append_blog_view_unique($postSlug,$pageTitle,$ip,$ua,$geo,$ref,$host,$utmSource,$utmMedium,$utmCampaign){
+  $postSlug=trim((string)$postSlug); if($postSlug==='') return false;
+  $header=['created_at','post_slug','page_title','visitor_hash','country','region','city','location','geo_source','referrer_host','utm_source','utm_medium','utm_campaign'];
+  ensure_csv_header(BLOG_VIEWS_FILE,$header);
+  $hash=visitor_hash($ip,$ua,$postSlug);
+  foreach(csv_read_assoc_compat(BLOG_VIEWS_FILE) as $r){ if(($r['post_slug']??'')===$postSlug && ($r['visitor_hash']??'')===$hash) return false; }
+  $f=fopen(BLOG_VIEWS_FILE,'a'); if(!$f) return false;
+  fputcsv($f,[date('c'),$postSlug,$pageTitle,$hash,$geo['country']??'Unknown',$geo['region']??'',$geo['city']??'',$geo['location']??'Unknown',$geo['source']??'',$host,$utmSource,$utmMedium,$utmCampaign]); fclose($f); return true;
+}
+function track_visit($pageTitle='',$postSlug=''){
   if(php_sapi_name()==='cli') return;
   $ua=$_SERVER['HTTP_USER_AGENT']??'';
   if(preg_match('/bot|crawl|spider|slurp|mediapartners|facebookexternalhit|preview/i',$ua)) return;
@@ -87,19 +153,35 @@ function track_visit($pageTitle=''){
   if(preg_match('/\.(css|js|jpg|jpeg|png|gif|svg|webp|ico|xml|txt)$/i',$uri)) return;
   $ip=client_ip(); $ref=$_SERVER['HTTP_REFERER']??''; $host='';
   if($ref){ $parts=parse_url($ref); $host=$parts['host']??''; }
-  $row=[date('c'),$uri,$pageTitle,$ip,rough_location_from_ip($ip),$ref,$host,$_GET['utm_source']??'',$_GET['utm_medium']??'',$_GET['utm_campaign']??'',$ua];
+  $geo=geo_location_from_ip($ip);
+  $utmSource=$_GET['utm_source']??''; $utmMedium=$_GET['utm_medium']??''; $utmCampaign=$_GET['utm_campaign']??'';
+  $row=[date('c'),$uri,$pageTitle,$ip,$geo['location']??rough_location_from_ip($ip),$geo['country']??'Unknown',$geo['region']??'',$geo['city']??'',$geo['source']??'',(string)$postSlug,$ref,$host,$utmSource,$utmMedium,$utmCampaign,$ua];
   append_traffic($row);
+  if($postSlug) append_blog_view_unique($postSlug,$pageTitle,$ip,$ua,$geo,$ref,$host,$utmSource,$utmMedium,$utmCampaign);
 }
 function traffic_rows($limit=1000){
-  if(!file_exists(TRAFFIC_FILE)) return [];
-  $f=fopen(TRAFFIC_FILE,'r'); if(!$f) return [];
-  $head=fgetcsv($f); $rows=[];
-  while(($r=fgetcsv($f))!==false){ if(count($r)==count($head)) $rows[]=array_combine($head,$r); }
-  fclose($f); $rows=array_reverse($rows); return array_slice($rows,0,$limit);
+  $rows=csv_read_assoc_compat(TRAFFIC_FILE);
+  $rows=array_reverse($rows); return array_slice($rows,0,$limit);
 }
 function traffic_summary($rows,$key,$limit=10){
   $out=[]; foreach($rows as $r){ $v=trim($r[$key]??''); if($v==='') $v='Direct / none'; $out[$v]=($out[$v]??0)+1; }
   arsort($out); return array_slice($out,0,$limit,true);
+}
+function blog_view_rows(){ return csv_read_assoc_compat(BLOG_VIEWS_FILE); }
+function blog_view_stats($posts){
+  $views=blog_view_rows(); $traffic=traffic_rows(5000); $out=[];
+  foreach($posts as $p){ $slug=$p['slug']??''; if($slug) $out[$slug]=['unique'=>0,'total'=>0,'locations'=>[],'countries'=>[],'last_view'=>'']; }
+  foreach($views as $v){
+    $slug=$v['post_slug']??''; if(!isset($out[$slug])) $out[$slug]=['unique'=>0,'total'=>0,'locations'=>[],'countries'=>[],'last_view'=>''];
+    $out[$slug]['unique']++;
+    $loc=trim($v['location']??''); if($loc==='') $loc=trim(implode(', ',array_filter([$v['city']??'',$v['region']??'',$v['country']??'']))); if($loc==='') $loc='Unknown';
+    $out[$slug]['locations'][$loc]=($out[$slug]['locations'][$loc]??0)+1;
+    $country=trim($v['country']??''); if($country==='') $country='Unknown'; $out[$slug]['countries'][$country]=($out[$slug]['countries'][$country]??0)+1;
+    if(($v['created_at']??'')>$out[$slug]['last_view']) $out[$slug]['last_view']=$v['created_at']??'';
+  }
+  foreach($traffic as $t){ $slug=$t['post_slug']??''; if($slug && isset($out[$slug])) $out[$slug]['total']++; }
+  foreach($out as &$st){ arsort($st['locations']); arsort($st['countries']); }
+  return $out;
 }
 
 function support_rows(){

@@ -8,6 +8,7 @@ $posts = load_posts(true);
 $content = json_encode(load_content(), JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
 $published_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 'published');
 $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 'draft');
+$blogStats = blog_view_stats($posts);
 ?>
 <!doctype html>
 <html lang="en">
@@ -16,8 +17,8 @@ $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Lynxcom Analytics Admin Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/styles.css?v=lynxcom-admin-wp-20260825">
-  <link rel="stylesheet" href="../assets/admin.css?v=lynxcom-admin-wp-20260825">
+  <link rel="stylesheet" href="../assets/styles.css?v=lynxcom-blog-geo-views-20260825">
+  <link rel="stylesheet" href="../assets/admin.css?v=lynxcom-blog-geo-views-20260825">
 </head>
 <body class="wp-admin-body">
 <div class="wp-admin-shell">
@@ -31,6 +32,7 @@ $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 
       <a href="#leads"><span class="dashicon">☏</span> Leads</a>
       <a href="#support"><span class="dashicon">☑</span> Support Tickets</a>
       <a href="#traffic"><span class="dashicon">↗</span> Traffic</a>
+      <a href="#blog-analytics"><span class="dashicon">◉</span> Blog Analytics</a>
       <a href="#blog"><span class="dashicon">✎</span> Blog Posts</a>
       <a href="#content"><span class="dashicon">⚙</span> Site Content</a>
       <div class="wp-menu-divider"></div>
@@ -88,11 +90,11 @@ $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 
             <div class="wp-traffic-grid">
               <div class="wp-mini-card"><h3>Top pages</h3><ul><?php foreach(traffic_summary($traffic,'page',8) as $k=>$v): ?><li><span><?=h($k)?></span><strong><?=h($v)?></strong></li><?php endforeach; ?></ul></div>
               <div class="wp-mini-card"><h3>Referral sites</h3><ul><?php foreach(traffic_summary($traffic,'referrer_host',8) as $k=>$v): ?><li><span><?=h($k)?></span><strong><?=h($v)?></strong></li><?php endforeach; ?></ul></div>
-              <div class="wp-mini-card"><h3>Location/IP hints</h3><ul><?php foreach(traffic_summary($traffic,'location_hint',8) as $k=>$v): ?><li><span><?=h($k)?></span><strong><?=h($v)?></strong></li><?php endforeach; ?></ul></div>
+              <div class="wp-mini-card"><h3>Visitor locations</h3><ul><?php foreach(traffic_summary($traffic,'location_hint',8) as $k=>$v): ?><li><span><?=h($k)?></span><strong><?=h($v)?></strong></li><?php endforeach; ?></ul></div>
               <div class="wp-mini-card"><h3>UTM sources</h3><ul><?php foreach(traffic_summary($traffic,'utm_source',8) as $k=>$v): ?><li><span><?=h($k)?></span><strong><?=h($v)?></strong></li><?php endforeach; ?></ul></div>
             </div>
-            <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Date</th><th>Page</th><th>IP</th><th>Location hint</th><th>Referrer</th><th>UTM Source</th><th>Campaign</th><th>User agent</th></tr></thead><tbody><?php foreach(array_slice($traffic,0,120) as $v): ?><tr><td><?=h($v['created_at']??'')?></td><td><?=h($v['page']??'')?></td><td><?=h($v['ip']??'')?></td><td><?=h($v['location_hint']??'')?></td><td><?=h($v['referrer_host']??($v['referrer']??''))?></td><td><?=h($v['utm_source']??'')?></td><td><?=h($v['utm_campaign']??'')?></td><td><?=h(substr($v['user_agent']??'',0,120))?></td></tr><?php endforeach; ?></tbody></table></div>
-            <p><small>Note: location is an offline IP hint. For city/country accuracy later, we can add a GeoIP database or privacy-safe API.</small></p>
+            <div class="table-wrap" style="margin-top:16px"><table><thead><tr><th>Date</th><th>Page</th><th>Post</th><th>Location</th><th>Country</th><th>Region</th><th>City</th><th>Referrer</th><th>UTM Source</th><th>Campaign</th><th>User agent</th></tr></thead><tbody><?php foreach(array_slice($traffic,0,120) as $v): ?><tr><td><?=h($v['created_at']??'')?></td><td><?=h($v['page']??'')?></td><td><?=h($v['post_slug']??'')?></td><td><?=h($v['location_hint']??'')?></td><td><?=h($v['country']??'')?></td><td><?=h($v['region']??'')?></td><td><?=h($v['city']??'')?></td><td><?=h($v['referrer_host']??($v['referrer']??''))?></td><td><?=h($v['utm_source']??'')?></td><td><?=h($v['utm_campaign']??'')?></td><td><?=h(substr($v['user_agent']??'',0,120))?></td></tr><?php endforeach; ?></tbody></table></div>
+            <p><small>Location is estimated from the visitor IP using a cached geo lookup. Accuracy depends on the visitor network/VPN/mobile carrier.</small></p>
           </div>
         </section>
 
@@ -100,6 +102,14 @@ $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 
           <div class="wp-card-head"><div><h2>Support tickets</h2><p>Incoming support requests with quick WhatsApp/email reply links.</p></div><span class="wp-count-pill"><?=count($support)?> total</span></div>
           <div class="wp-card-body">
             <div class="table-wrap"><table><thead><tr><th>Date</th><th>Ticket</th><th>Name</th><th>Phone</th><th>Email</th><th>Category</th><th>Urgency</th><th>Subject</th><th>Message</th><th>Reply</th></tr></thead><tbody><?php foreach(array_slice($support,0,80) as $t): ?><tr><td><?=h($t['created_at']??'')?></td><td><?=h($t['ticket_id']??'')?></td><td><?=h($t['name']??'')?></td><td><?=h($t['phone']??'')?></td><td><?=h($t['email']??'')?></td><td><?=h($t['category']??'')?></td><td><?=h($t['urgency']??'')?></td><td><?=h($t['subject']??'')?></td><td><?=h($t['message']??'')?></td><td><a href="https://wa.me/<?=preg_replace('/\D/','',$t['phone']??'')?>" target="_blank" rel="noopener">WhatsApp</a><?php if(!empty($t['email'])): ?> · <a href="mailto:<?=h($t['email'])?>?subject=Re: <?=h($t['subject']??'Lynxcom support')?>">Email</a><?php endif; ?></td></tr><?php endforeach; ?></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="wp-card wp-section-anchor" id="blog-analytics">
+          <div class="wp-card-head"><div><h2>Blog post analytics</h2><p>Unique post views and where readers are coming from.</p></div><span class="wp-count-pill"><?=count($blogStats)?> tracked posts</span></div>
+          <div class="wp-card-body">
+            <div class="table-wrap"><table><thead><tr><th>Post</th><th>Total views</th><th>Unique views</th><th>Top locations</th><th>Countries</th><th>Last unique view</th></tr></thead><tbody><?php foreach($posts as $p): $slug=$p['slug']??''; $st=$blogStats[$slug]??['total'=>0,'unique'=>0,'locations'=>[],'countries'=>[],'last_view'=>'']; ?><tr><td><strong><?=h($p['title']??'Untitled')?></strong><br><small><?=h($slug)?></small></td><td><?=h($st['total']??0)?></td><td><?=h($st['unique']??0)?></td><td><?php $locs=array_slice($st['locations']??[],0,5,true); if(!$locs) echo '<span class="wp-muted">No views yet</span>'; foreach($locs as $k=>$v): ?><span class="wp-location-chip"><?=h($k)?> · <?=h($v)?></span><?php endforeach; ?></td><td><?php $countries=array_slice($st['countries']??[],0,5,true); if(!$countries) echo '<span class="wp-muted">—</span>'; foreach($countries as $k=>$v): ?><span class="wp-location-chip"><?=h($k)?> · <?=h($v)?></span><?php endforeach; ?></td><td><?=h($st['last_view']??'')?></td></tr><?php endforeach; ?></tbody></table></div>
+            <p><small>Unique views are counted once per blog post per visitor fingerprint. Location is based on IP lookup and may be approximate.</small></p>
           </div>
         </section>
 
@@ -131,6 +141,6 @@ $draft_posts = array_filter($posts, fn($p) => ($p['status'] ?? 'published') === 
   </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-<script src="../assets/admin-blog-editor.js?v=lynxcom-admin-wp-20260825"></script>
+<script src="../assets/admin-blog-editor.js?v=lynxcom-blog-geo-views-20260825"></script>
 </body>
 </html>
