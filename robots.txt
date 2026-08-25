@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /data/
+Disallow: /includes/
+Disallow: /setup.php
+Disallow: /submit-lead.php
+Disallow: /submit-support.php
 Disallow: /power-bi-consultant-nigeria.php
 Disallow: /excel-google-sheets-dashboard-automation.php
 Sitemap: https://lynxcomanalytics.com/sitemap.xml
+Sitemap: https://lynxcomanalytics.com/sitemap.php

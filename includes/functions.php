@@ -233,12 +233,40 @@ function excerpt($text,$max=170){
   return strlen($text)>$max ? substr($text,0,$max-1).'…' : $text;
 }
 function rebuild_sitemap(){
-  $base='https://lynxcomanalytics.com/';
-  $urls=[['loc'=>$base,'priority'=>'1.0'],['loc'=>$base.'blog.php','priority'=>'0.9'],['loc'=>$base.'ai-automation-agency-nigeria.php','priority'=>'0.8'],['loc'=>$base.'business-dashboard-consulting-nigeria.php','priority'=>'0.8'],['loc'=>$base.'data-analytics-consulting-nigeria.php','priority'=>'0.8'],['loc'=>$base.'customer-follow-up-automation-nigeria.php','priority'=>'0.8']];
-  foreach(load_posts(false) as $p){ if(!empty($p['slug'])) $urls[]=['loc'=>$base.'post.php?slug='.rawurlencode($p['slug']),'priority'=>'0.7']; }
-  $xml='<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
-  foreach($urls as $u){ $xml.='  <url><loc>'.h($u['loc']).'</loc><lastmod>'.date('Y-m-d').'</lastmod><changefreq>weekly</changefreq><priority>'.$u['priority'].'</priority></url>' . "\n"; }
-  $xml.='</urlset>' . "\n";
+  $base='https://lynxcomanalytics.com';
+  $urls=[
+    ['loc'=>$base.'/', 'priority'=>'1.0', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/blog.php', 'priority'=>'0.9', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/support.php', 'priority'=>'0.8', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/ai-automation-agency-nigeria.php', 'priority'=>'0.8', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/business-dashboard-consulting-nigeria.php', 'priority'=>'0.8', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/data-analytics-consulting-nigeria.php', 'priority'=>'0.8', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')],
+    ['loc'=>$base.'/customer-follow-up-automation-nigeria.php', 'priority'=>'0.8', 'freq'=>'weekly', 'lastmod'=>date('Y-m-d')]
+  ];
+  foreach(load_posts(false) as $post){
+    if(!empty($post['slug'])) $urls[]=['loc'=>$base.'/post.php?slug='.rawurlencode($post['slug']),'priority'=>'0.7','freq'=>'monthly','lastmod'=>substr($post['updated_at'] ?? ($post['created_at'] ?? date('Y-m-d')),0,10)];
+  }
+  $xml='<?xml version="1.0" encoding="UTF-8"?>' . "
+" . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "
+";
+  $seen=[];
+  foreach($urls as $u){
+    if(isset($seen[$u['loc']])) continue; $seen[$u['loc']]=true;
+    $xml.='  <url>' . "
+";
+    $xml.='    <loc>'.htmlspecialchars($u['loc'], ENT_XML1, 'UTF-8').'</loc>' . "
+";
+    $xml.='    <lastmod>'.h($u['lastmod']).'</lastmod>' . "
+";
+    $xml.='    <changefreq>'.h($u['freq']).'</changefreq>' . "
+";
+    $xml.='    <priority>'.h($u['priority']).'</priority>' . "
+";
+    $xml.='  </url>' . "
+";
+  }
+  $xml.='</urlset>' . "
+";
   @file_put_contents(APP_ROOT.'/sitemap.xml',$xml);
 }
 
