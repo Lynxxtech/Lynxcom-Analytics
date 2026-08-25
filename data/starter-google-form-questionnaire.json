@@ -1,0 +1,13 @@
+{
+  "title": "Lynxcom Analytics — Starter Package Client Intake",
+  "description": "Comprehensive intake questionnaire for clients subscribing to the Starter package: Dashboard & Automation Audit.",
+  "sections": [
+    {"title":"Contact & business identity","questions":["Full name","Phone / WhatsApp number","Email address","Business / organization name","Your role in the business","Business location","Industry / business type","How long has the business been operating?","Number of staff/team members","Number of branches/locations"]},
+    {"title":"Current records & tools","questions":["What tools do you currently use for business records?","What records do you currently keep?","Where are your records stored?","How often are records updated?","How clean/complete is your current data?"]},
+    {"title":"Sales, customers & operations","questions":["Main products/services you sell","Sales/customer channels","Approximate monthly transactions/orders/customers","Do you have customer contact data?","How do you currently follow up customers/leads?","Where do you lose time or miss follow-ups?"]},
+    {"title":"Reporting & KPI needs","questions":["What reports do you currently prepare or review?","What KPIs/numbers do you currently track?","What business goals should the Starter audit support?","Biggest reporting/data pain right now","Who will use the dashboard/report?","How often do you want to review it?","Preferred dashboard/reporting format"]},
+    {"title":"Data cleanup & audit readiness","questions":["What data formats can you provide?","How should Lynxcom review your records?","Are you ready to provide sample data for the audit?","Privacy reminder: do not share passwords, OTPs, card details or login credentials."]},
+    {"title":"Automation opportunities","questions":["Which repetitive tasks consume the most time?","Payment tracking situation","Debtor/customer balance tracking","Inventory/stock tracking","Staff/task/performance tracking","Top automation priorities"]},
+    {"title":"Scope, budget & next step","questions":["What will make this Starter audit successful for you?","Starter budget confirmation","Preferred timeline","Who approves payment/project decisions?","Will your team need training?","Privacy/data consent","Any extra context we should know?"]}
+  ]
+}

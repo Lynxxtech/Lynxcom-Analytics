@@ -35,5 +35,9 @@ if($email && filter_var($email,FILTER_VALIDATE_EMAIL)){
   lx_send_html_mail($email,'We received your Lynxcom Analytics consultation request',$clientHtml,$adminEmail);
 }
 
-header('Location: index.php?sent=1#contact'); exit;
+$redirectUrl = 'index.php?sent=1#contact';
+if(trim($budget)==='₦75k–₦150k'){
+  $redirectUrl = 'starter-intake.php?name='.rawurlencode($name).'&phone='.rawurlencode($phone).'&email='.rawurlencode($email).'&business='.rawurlencode($business);
+}
+header('Location: '.$redirectUrl); exit;
 ?>

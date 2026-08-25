@@ -13,6 +13,7 @@ define('STORAGE_DIR', lx_storage_dir());
 define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
 define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
+define('STARTER_INTAKE_FILE', STORAGE_DIR . '/starter_intake.csv');
 define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
 define('BLOG_VIEWS_FILE', STORAGE_DIR . '/blog_views.csv');
 define('GEO_CACHE_FILE', STORAGE_DIR . '/geo_cache.json');
@@ -196,6 +197,19 @@ function blog_view_stats($posts){
   foreach($traffic as $t){ $slug=$t['post_slug']??''; if($slug && isset($out[$slug])) $out[$slug]['total']++; }
   foreach($out as &$st){ arsort($st['locations']); arsort($st['countries']); }
   return $out;
+}
+
+
+function starter_intake_rows(){
+  $rows=csv_read_assoc_compat(STARTER_INTAKE_FILE);
+  return array_reverse($rows);
+}
+function append_starter_intake($row){
+  $header=['created_at','lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','current_tools','records_kept','record_location','record_frequency','data_quality','sales_channels','products_services','monthly_transactions','current_reports','kpis_tracked','top_business_goals','biggest_reporting_pain','repetitive_tasks','customer_followup_method','missed_followups','payment_tracking','debtor_tracking','inventory_tracking','staff_tracking','customer_data_available','data_formats_available','access_method','sample_data_ready','dashboard_users','dashboard_frequency','preferred_dashboard_format','automation_priorities','success_definition','budget_confirmed','timeline','decision_maker','training_needed','privacy_consent','extra_notes','ip','status'];
+  ensure_csv_header(STARTER_INTAKE_FILE,$header);
+  if(!is_dir(dirname(STARTER_INTAKE_FILE))) @mkdir(dirname(STARTER_INTAKE_FILE),0755,true);
+  $f=fopen(STARTER_INTAKE_FILE,'a'); if(!$f) return false;
+  fputcsv($f,$row); fclose($f); return true;
 }
 
 function support_rows(){
