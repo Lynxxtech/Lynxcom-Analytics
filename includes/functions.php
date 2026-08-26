@@ -233,10 +233,67 @@ function mail_log_write($line){
   if(!is_dir(STORAGE_DIR)) @mkdir(STORAGE_DIR,0755,true);
   @file_put_contents(STORAGE_DIR.'/mail.log', date('c').' | '.$line."\n", FILE_APPEND);
 }
+function mail_config(){
+  $path = STORAGE_DIR.'/mail.local.php';
+  if(file_exists($path)){
+    $cfg = include $path;
+    if(is_array($cfg)) return $cfg;
+  }
+  return [];
+}
+function smtp_expect($fp,$codes){
+  $line='';
+  while(!feof($fp)){
+    $part=fgets($fp,515); if($part===false) break; $line.=$part;
+    if(strlen($part)>=4 && $part[3]==' ') break;
+  }
+  foreach((array)$codes as $code){ if(strpos($line,(string)$code)===0) return $line; }
+  throw new Exception(trim($line) ?: 'SMTP response missing');
+}
+function smtp_cmd($fp,$cmd,$codes){ fwrite($fp,$cmd."\r\n"); return smtp_expect($fp,$codes); }
+function send_html_mail_smtp($to,$subject,$html,$replyTo,$cfg){
+  $host=$cfg['host']??''; $port=(int)($cfg['port']??465); $user=$cfg['username']??''; $pass=$cfg['password']??''; $from=$cfg['from']??'hello@lynxcomanalytics.com'; $fromName=$cfg['from_name']??'Lynxcom Analytics'; $enc=strtolower($cfg['encryption']??'ssl');
+  if(!$host || !$user || !$pass) throw new Exception('SMTP config incomplete');
+  $remote=($enc==='ssl'?'ssl://':'').$host.':'.$port;
+  $fp=@stream_socket_client($remote,$errno,$errstr,20,STREAM_CLIENT_CONNECT);
+  if(!$fp) throw new Exception('SMTP connect failed: '.$errstr);
+  stream_set_timeout($fp,25);
+  smtp_expect($fp,[220]);
+  smtp_cmd($fp,'EHLO lynxcomanalytics.com',[250]);
+  if($enc==='tls'){
+    smtp_cmd($fp,'STARTTLS',[220]);
+    if(!stream_socket_enable_crypto($fp,true,STREAM_CRYPTO_METHOD_TLS_CLIENT)) throw new Exception('STARTTLS failed');
+    smtp_cmd($fp,'EHLO lynxcomanalytics.com',[250]);
+  }
+  smtp_cmd($fp,'AUTH LOGIN',[334]);
+  smtp_cmd($fp,base64_encode($user),[334]);
+  smtp_cmd($fp,base64_encode($pass),[235]);
+  smtp_cmd($fp,'MAIL FROM:<'.$from.'>',[250]);
+  smtp_cmd($fp,'RCPT TO:<'.$to.'>',[250,251]);
+  smtp_cmd($fp,'DATA',[354]);
+  $headers=[];
+  $headers[]='MIME-Version: 1.0';
+  $headers[]='Content-Type: text/html; charset=UTF-8';
+  $headers[]='From: '.$fromName.' <'.$from.'>';
+  $headers[]='To: <'.$to.'>';
+  $headers[]='Subject: '.$subject;
+  $headers[]='Date: '.date(DATE_RFC2822);
+  $headers[]='Message-ID: <'.uniqid('lx-',true).'@lynxcomanalytics.com>';
+  if($replyTo && filter_var($replyTo,FILTER_VALIDATE_EMAIL)) $headers[]='Reply-To: '.$replyTo;
+  $body=implode("\r\n",$headers)."\r\n\r\n".$html;
+  $body=preg_replace('/^\./m','..',$body);
+  fwrite($fp,$body."\r\n.\r\n"); smtp_expect($fp,[250]);
+  @smtp_cmd($fp,'QUIT',[221,250]); fclose($fp); return true;
+}
 function send_html_mail($to,$subject,$html,$replyTo=''){
   $to = clean_mail_header($to); $subject = clean_mail_header($subject); $replyTo = clean_mail_header($replyTo);
   if(!$to || !filter_var($to,FILTER_VALIDATE_EMAIL)) { mail_log_write('failed | invalid_to | '.$to.' | '.$subject); return false; }
-  $from = 'hello@lynxcomanalytics.com';
+  $cfg=mail_config();
+  if(!empty($cfg['host'])){
+    try{ send_html_mail_smtp($to,$subject,$html,$replyTo,$cfg); mail_log_write('sent_smtp | '.$to.' | '.$subject); return true; }
+    catch(Exception $e){ mail_log_write('failed_smtp | '.$to.' | '.$subject.' | '.$e->getMessage()); }
+  }
+  $from = $cfg['from'] ?? 'hello@lynxcomanalytics.com';
   $headers = [];
   $headers[] = 'MIME-Version: 1.0';
   $headers[] = 'Content-Type: text/html; charset=UTF-8';
@@ -248,7 +305,7 @@ function send_html_mail($to,$subject,$html,$replyTo=''){
   $params = '-f'.$from;
   $ok = @mail($to,$subject,$html,implode("\r\n",$headers),$params);
   if(!$ok) $ok = @mail($to,$subject,$html,implode("\r\n",$headers));
-  mail_log_write(($ok?'sent':'failed').' | '.$to.' | '.$subject);
+  mail_log_write(($ok?'sent_phpmail':'failed_phpmail').' | '.$to.' | '.$subject);
   return $ok;
 }
 
