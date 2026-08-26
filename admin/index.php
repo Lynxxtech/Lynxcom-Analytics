@@ -5,6 +5,7 @@ $leads = lead_rows();
 $support = support_rows();
 $traffic = traffic_rows(1500);
 $starterIntakes = starter_intake_rows();
+$growthIntakes = growth_intake_rows();
 $posts = load_posts(true);
 $mailLogPath = STORAGE_DIR.'/mail.log';
 $mailLog = file_exists($mailLogPath) ? array_reverse(array_slice(file($mailLogPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES), -80)) : [];
@@ -35,6 +36,7 @@ $blogStats = blog_view_stats($posts);
       <a href="#leads"><span class="dashicon">☏</span> Leads</a>
       <a href="#support"><span class="dashicon">☑</span> Support Tickets</a>
       <a href="#starter-intakes"><span class="dashicon">▣</span> Starter Intakes</a>
+      <a href="#growth-intakes"><span class="dashicon">▤</span> Growth Intakes</a>
       <a href="#mail-log"><span class="dashicon">✉</span> Mail Log</a>
       <a href="#traffic"><span class="dashicon">↗</span> Traffic</a>
       <a href="#blog-analytics"><span class="dashicon">◉</span> Blog Analytics</a>
@@ -74,7 +76,7 @@ $blogStats = blog_view_stats($posts);
       <section class="wp-stats-grid" aria-label="Admin overview stats">
         <div class="wp-stat-card"><div><span>Total leads</span><strong><?=count($leads)?></strong><em>Consultation enquiries</em></div><div class="wp-stat-icon">☏</div></div>
         <div class="wp-stat-card"><div><span>Support</span><strong><?=count($support)?></strong><em>Customer requests</em></div><div class="wp-stat-icon">☑</div></div>
-        <div class="wp-stat-card"><div><span>Starter intakes</span><strong><?=count($starterIntakes)?></strong><em>Detailed audit forms</em></div><div class="wp-stat-icon">▣</div></div><div class="wp-stat-card"><div><span>Visits</span><strong><?=count($traffic)?></strong><em>Tracked sessions</em></div><div class="wp-stat-icon">↗</div></div>
+        <div class="wp-stat-card"><div><span>Starter intakes</span><strong><?=count($starterIntakes)?></strong><em>Detailed audit forms</em></div><div class="wp-stat-icon">▣</div></div><div class="wp-stat-card"><div><span>Growth intakes</span><strong><?=count($growthIntakes)?></strong><em>Dashboard/workflow systems</em></div><div class="wp-stat-icon">▤</div></div><div class="wp-stat-card"><div><span>Visits</span><strong><?=count($traffic)?></strong><em>Tracked sessions</em></div><div class="wp-stat-icon">↗</div></div>
         <div class="wp-stat-card"><div><span>Blog posts</span><strong><?=count($posts)?></strong><em><?=count($published_posts)?> published · <?=count($draft_posts)?> draft</em></div><div class="wp-stat-icon">✎</div></div>
       </section>
 
@@ -93,6 +95,13 @@ $blogStats = blog_view_stats($posts);
           <div class="wp-card-head"><div><h2>Starter package intakes</h2><p>Detailed questionnaires submitted by Starter audit clients.</p></div><span class="wp-count-pill"><?=count($starterIntakes)?> total</span></div>
           <div class="wp-card-body">
             <div class="table-wrap"><table><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Business</th><th>Industry</th><th>Location</th><th>Biggest pain</th><th>Success definition</th><th>Budget</th><th>Timeline</th><th>Reply</th></tr></thead><tbody><?php foreach(array_slice($starterIntakes,0,80) as $i): ?><tr><td><?=h($i['created_at']??'')?></td><td><?=h($i['lead_name']??'')?></td><td><?=h($i['lead_phone']??'')?></td><td><?=h($i['lead_email']??'')?></td><td><?=h($i['business_name']??'')?></td><td><?=h($i['industry']??'')?></td><td><?=h($i['location']??'')?></td><td><?=h($i['biggest_reporting_pain']??'')?></td><td><?=h($i['success_definition']??'')?></td><td><?=h($i['budget_confirmed']??'')?></td><td><?=h($i['timeline']??'')?></td><td><a href="https://wa.me/<?=preg_replace('/\D/','',$i['lead_phone']??'')?>" target="_blank" rel="noopener">WhatsApp</a><?php if(!empty($i['lead_email'])): ?> · <a href="mailto:<?=h($i['lead_email'])?>?subject=Your Lynxcom Starter Audit">Email</a><?php endif; ?></td></tr><?php endforeach; ?></tbody></table></div>
+          </div>
+        </section>
+
+        <section class="wp-card wp-section-anchor" id="growth-intakes">
+          <div class="wp-card-head"><div><h2>Growth package intakes</h2><p>Detailed questionnaires submitted by Growth Dashboard & Workflow System prospects.</p></div><span class="wp-count-pill"><?=count($growthIntakes)?> total</span></div>
+          <div class="wp-card-body">
+            <div class="table-wrap"><table><thead><tr><th>Date</th><th>Name</th><th>Phone</th><th>Email</th><th>Business</th><th>Industry</th><th>Location</th><th>KPIs</th><th>Dashboard pages</th><th>Workflow bottlenecks</th><th>Budget</th><th>Timeline</th><th>Reply</th></tr></thead><tbody><?php foreach(array_slice($growthIntakes,0,80) as $i): ?><tr><td><?=h($i['created_at']??'')?></td><td><?=h($i['lead_name']??'')?></td><td><?=h($i['lead_phone']??'')?></td><td><?=h($i['lead_email']??'')?></td><td><?=h($i['business_name']??'')?></td><td><?=h($i['industry']??'')?></td><td><?=h($i['location']??'')?></td><td><?=h($i['kpis_tracked']??'')?></td><td><?=h($i['required_dashboard_pages']??'')?></td><td><?=h($i['workflow_bottlenecks']??'')?></td><td><?=h($i['budget_confirmed']??'')?></td><td><?=h($i['timeline']??'')?></td><td><a href="https://wa.me/<?=preg_replace('/\D/','',$i['lead_phone']??'')?>" target="_blank" rel="noopener">WhatsApp</a><?php if(!empty($i['lead_email'])): ?> · <a href="mailto:<?=h($i['lead_email'])?>?subject=Your Lynxcom Growth Dashboard System">Email</a><?php endif; ?></td></tr><?php endforeach; ?></tbody></table></div>
           </div>
         </section>
 

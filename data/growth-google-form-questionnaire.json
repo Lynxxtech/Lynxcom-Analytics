@@ -1,0 +1,13 @@
+{
+  "title": "Lynxcom Analytics — Growth Dashboard & Workflow System Intake",
+  "description": "Comprehensive intake questionnaire for clients subscribing to the Growth package: Dashboard & Workflow System (₦200k–₦500k).",
+  "sections": [
+    {"title":"Contact, authority & business identity","questions":["Full name","Phone / WhatsApp","Email address","Business / organization name","Your role","Who approves this project/payment?","Industry / business type","Business location","Years operating","Staff/team count","Branches/locations/service points"]},
+    {"title":"Current tools, records & data readiness","questions":["Current tools used","Current records kept","All data sources","Record owners/updaters","Record update frequency","Data quality","Known data cleanup needs","Sample data readiness"]},
+    {"title":"Sales, customers, payments & operations","questions":["Products/services sold","Sales/customer channels","Customer segments","Monthly transactions/orders/customers","Average order value","Payment methods","Customer data availability","Current customer follow-up method"]},
+    {"title":"Dashboard requirements & management reporting","questions":["Current reports","Management report frequency","Required KPIs","Key management questions","Dashboard users","Devices dashboard must support","Dashboard review frequency","Preferred dashboard/report format","Required dashboard pages/views","Filtering/search needs","User access roles","Export/download needs"]},
+    {"title":"Trackers to build","questions":["Tracker modules needed","Customer tracker requirements","Staff tracker requirements","Payment/debtor tracker requirements","Inventory/stock tracker requirements"]},
+    {"title":"Workflow system & automation plan","questions":["Current workflow from enquiry to delivery/payment","Workflow bottlenecks","First automation/systemization priorities","Notifications/reminders needed","Approval processes","Apps/platforms needing integration"]},
+    {"title":"Training, support, scope & success","questions":["Training/support users","Support expectation","Success definition","Growth budget confirmation","Preferred timeline","Urgency","Privacy/data consent","Extra context"]}
+  ]
+}

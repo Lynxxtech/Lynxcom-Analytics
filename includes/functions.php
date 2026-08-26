@@ -14,6 +14,7 @@ define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
 define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
 define('STARTER_INTAKE_FILE', STORAGE_DIR . '/starter_intake.csv');
+define('GROWTH_INTAKE_FILE', STORAGE_DIR . '/growth_intake.csv');
 define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
 define('BLOG_VIEWS_FILE', STORAGE_DIR . '/blog_views.csv');
 define('GEO_CACHE_FILE', STORAGE_DIR . '/geo_cache.json');
@@ -199,6 +200,19 @@ function blog_view_stats($posts){
   return $out;
 }
 
+
+
+function growth_intake_rows(){
+  $rows=csv_read_assoc_compat(GROWTH_INTAKE_FILE);
+  return array_reverse($rows);
+}
+function append_growth_intake($row){
+  $header=['created_at','lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','decision_maker','current_tools','records_kept','data_sources','record_owners','record_frequency','data_quality','data_cleanup_needed','sample_data_ready','sales_channels','customer_segments','products_services','monthly_transactions','average_order_value','payment_methods','customer_data_available','customer_followup_method','current_reports','report_frequency','kpis_tracked','management_questions','dashboard_users','dashboard_devices','dashboard_frequency','preferred_dashboard_format','required_dashboard_pages','filtering_needs','access_roles','export_needs','tracker_needs','customer_tracker_needs','staff_tracker_needs','payment_tracker_needs','inventory_tracker_needs','workflow_current','workflow_bottlenecks','workflow_automation_needs','notifications_needed','approval_processes','integrations_needed','training_users','support_expectation','success_definition','budget_confirmed','timeline','urgency','privacy_consent','extra_notes','ip','status'];
+  ensure_csv_header(GROWTH_INTAKE_FILE,$header);
+  if(!is_dir(dirname(GROWTH_INTAKE_FILE))) @mkdir(dirname(GROWTH_INTAKE_FILE),0755,true);
+  $f=fopen(GROWTH_INTAKE_FILE,'a'); if(!$f) return false;
+  fputcsv($f,$row); fclose($f); return true;
+}
 
 function starter_intake_rows(){
   $rows=csv_read_assoc_compat(STARTER_INTAKE_FILE);
