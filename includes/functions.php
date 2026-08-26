@@ -228,18 +228,27 @@ function append_support($row){
   fputcsv($f,$row);
   fclose($f); return true;
 }
+function clean_mail_header($v){ return trim(str_replace(["\r","\n"],' ',(string)$v)); }
+function mail_log_write($line){
+  if(!is_dir(STORAGE_DIR)) @mkdir(STORAGE_DIR,0755,true);
+  @file_put_contents(STORAGE_DIR.'/mail.log', date('c').' | '.$line."\n", FILE_APPEND);
+}
 function send_html_mail($to,$subject,$html,$replyTo=''){
-  $to = trim(str_replace(["\r","\n"],' ',(string)$to));
-  $subject = trim(str_replace(["\r","\n"],' ',(string)$subject));
-  $replyTo = trim(str_replace(["\r","\n"],' ',(string)$replyTo));
-  if(!$to || !filter_var($to,FILTER_VALIDATE_EMAIL)) return false;
+  $to = clean_mail_header($to); $subject = clean_mail_header($subject); $replyTo = clean_mail_header($replyTo);
+  if(!$to || !filter_var($to,FILTER_VALIDATE_EMAIL)) { mail_log_write('failed | invalid_to | '.$to.' | '.$subject); return false; }
   $from = 'hello@lynxcomanalytics.com';
-  $headers = "MIME-Version: 1.0\r\n";
-  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-  $headers .= "From: Lynxcom Analytics <{$from}>\r\n";
-  if($replyTo && filter_var($replyTo,FILTER_VALIDATE_EMAIL)) $headers .= "Reply-To: {$replyTo}\r\n";
-  $ok=@mail($to,$subject,$html,$headers);
-  @file_put_contents(DATA_DIR.'/mail.log', date('c').' | '.($ok?'sent':'failed').' | '.$to.' | '.$subject."\n", FILE_APPEND);
+  $headers = [];
+  $headers[] = 'MIME-Version: 1.0';
+  $headers[] = 'Content-Type: text/html; charset=UTF-8';
+  $headers[] = 'From: Lynxcom Analytics <'.$from.'>';
+  $headers[] = 'Sender: '.$from;
+  $headers[] = 'Return-Path: '.$from;
+  $headers[] = 'X-Mailer: Lynxcom Analytics PHP Mailer';
+  if($replyTo && filter_var($replyTo,FILTER_VALIDATE_EMAIL)) $headers[] = 'Reply-To: '.$replyTo;
+  $params = '-f'.$from;
+  $ok = @mail($to,$subject,$html,implode("\r\n",$headers),$params);
+  if(!$ok) $ok = @mail($to,$subject,$html,implode("\r\n",$headers));
+  mail_log_write(($ok?'sent':'failed').' | '.$to.' | '.$subject);
   return $ok;
 }
 

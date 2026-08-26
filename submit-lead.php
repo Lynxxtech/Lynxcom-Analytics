@@ -9,19 +9,7 @@ if(!$name || !$phone || !$message) die('Name, phone and message are required.');
 
 append_lead([date('c'),$name,$phone,$email,$business,$service,$budget,$message,$_SERVER['REMOTE_ADDR']??'','new']);
 
-function lx_clean_header($v){ return trim(str_replace(["\r","\n"],' ',(string)$v)); }
-function lx_send_html_mail($to,$subject,$html,$replyTo=''){
-  $to = lx_clean_header($to); $subject = lx_clean_header($subject); $replyTo = lx_clean_header($replyTo);
-  if(!$to || !filter_var($to,FILTER_VALIDATE_EMAIL)) return false;
-  $from = 'hello@lynxcomanalytics.com';
-  $headers = "MIME-Version: 1.0\r\n";
-  $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-  $headers .= "From: Lynxcom Analytics <{$from}>\r\n";
-  if($replyTo && filter_var($replyTo,FILTER_VALIDATE_EMAIL)) $headers .= "Reply-To: {$replyTo}\r\n";
-  $ok = @mail($to,$subject,$html,$headers);
-  @file_put_contents(DATA_DIR.'/mail.log', date('c').' | '.($ok?'sent':'failed').' | '.$to.' | '.$subject."\n", FILE_APPEND);
-  return $ok;
-}
+function lx_send_html_mail($to,$subject,$html,$replyTo=''){ return send_html_mail($to,$subject,$html,$replyTo); }
 
 $adminEmail = 'hello@lynxcomanalytics.com';
 $brand = h($c['brand'] ?? 'Lynxcom Analytics');
