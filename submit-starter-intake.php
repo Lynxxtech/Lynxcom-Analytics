@@ -19,5 +19,5 @@ if($data['lead_email'] && filter_var($data['lead_email'],FILTER_VALIDATE_EMAIL))
   $clientHtml="<div style='font-family:Arial,sans-serif;line-height:1.7;color:#061b31'><h2>Starter intake received</h2><p>Thank you, <strong>".si_h($data['lead_name'])."</strong>. Lynxcom Analytics has received your Starter package questionnaire.</p><p>We will review your business records, reporting needs, KPI gaps and automation opportunities, then contact you with the next step for your Dashboard & Automation Audit.</p><p>Regards,<br><strong>Lynxcom Analytics</strong></p></div>";
   send_html_mail($data['lead_email'],'Your Lynxcom Starter intake was received',$clientHtml,$adminEmail);
 }
-header('Location: starter-intake.php?sent=1'); exit;
+header('Location: starter-thank-you.php?name='.rawurlencode($data['lead_name']).'&business='.rawurlencode($data['business_name'])); exit;
 ?>

@@ -1,0 +1,23 @@
+<?php
+require __DIR__.'/includes/functions.php';
+track_visit('Starter package thank you');
+$c=load_content();
+$name=trim($_GET['name']??'');
+$business=trim($_GET['business']??'');
+?>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Starter Audit Intake Received | Lynxcom Analytics</title>
+<link rel="canonical" href="https://lynxcomanalytics.com/starter-thank-you.php">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Thank you page for Lynxcom Analytics Starter Dashboard & Automation Audit intake submissions.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/styles.css?v=starter-thank-you-20260826">
+</head>
+<body><header class="site-header"><nav class="nav wrap"><a class="brand brand-logo" href="/"><img src="assets/lynxcom-logo.svg" alt="Lynxcom Analytics logo"></a><button class="nav-toggle" aria-label="Open menu">☰</button><div class="nav-links" id="navLinks"><a href="/#services">Services</a><a href="/#packages">Packages</a><a href="blog.php">Blog</a><a href="support.php">Support</a><a href="/#contact" class="nav-cta">Book consultation</a><div class="nav-contact"><span>Contact</span><a href="tel:+2348136377667">+234 813 637 7667</a><a href="mailto:hello@lynxcomanalytics.com">hello@lynxcomanalytics.com</a></div></div></nav></header>
+<main>
+<section class="starter-thank-hero"><div class="wrap starter-thank-wrap"><div class="starter-thank-copy"><span class="kicker">Starter Audit Intake Received</span><h1>Thank you<?= $name ? ', '.h($name) : '' ?>. Your audit intake is in.</h1><p><?= $business ? 'We have received the Starter Audit details for <strong>'.h($business).'</strong>.' : 'We have received your Starter Dashboard & Automation Audit details.' ?> Lynxcom Analytics will review your answers and contact you with the next step.</p><div class="starter-thank-actions"><a class="btn primary" href="mailto:hello@lynxcomanalytics.com">Email Lynxcom</a><a class="btn ghost" href="https://wa.me/2348136377667">Chat on WhatsApp</a></div></div><aside class="starter-thank-status"><div class="checkmark">✓</div><h2>Submission confirmed</h2><p>Your answers have been saved for review. Please do not send passwords, OTPs, card details, or login credentials.</p></aside></div></section>
+<section class="starter-next-section"><div class="wrap"><div class="section-head compact"><span class="kicker">What happens next</span><h2>Your Starter audit process</h2><p>These are the next steps before Lynxcom begins the Dashboard & Automation Audit.</p></div><div class="starter-next-grid"><article><b>1</b><h3>Submission review</h3><p>Benny/Lynxcom reviews your business records, KPI needs, reporting pain points, automation opportunities, timeline, and budget fit.</p></article><article><b>2</b><h3>Sample records request</h3><p>We may request safe sample records such as Excel/CSV files, Google Sheets, PDF reports, POS/app exports, screenshots, sales records, customer list, stock list, debtor/payment list, or staff/task trackers.</p></article><article><b>3</b><h3>Scope and fee confirmation</h3><p>We confirm the Starter audit scope and final fee within the ₦75k–₦150k range based on the complexity and cleanliness of your records.</p></article><article><b>4</b><h3>Audit delivery</h3><p>You receive findings on your process, data quality, KPI gaps, reporting setup, automation opportunities, and the recommended next roadmap.</p></article></div></div></section>
+<section class="starter-records-section"><div class="wrap starter-records-box"><div><span class="kicker light">Prepare safely</span><h2>Records you may be asked to share</h2><p>Only send business records needed for the audit. Do not send passwords or private login details.</p></div><div class="starter-records-list"><span>Sales records</span><span>Expense records</span><span>Customer list</span><span>Inventory/stock list</span><span>Debtors/payment list</span><span>Staff/task tracker</span><span>Excel/CSV exports</span><span>PDF reports</span><span>POS/app exports</span><span>Screenshots if files are unavailable</span></div></div></section>
+</main><footer class="footer wrap"><div><strong>Lynxcom Analytics</strong><p>Business dashboards, reporting and workflow automation.</p></div><div class="footer-links"><a href="/">Home</a><a href="blog.php">Blog</a><a href="support.php">Support</a></div></footer><script src="assets/script.js?v=starter-thank-you-20260826"></script></body></html>
