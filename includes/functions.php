@@ -15,6 +15,7 @@ define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
 define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
 define('STARTER_INTAKE_FILE', STORAGE_DIR . '/starter_intake.csv');
 define('GROWTH_INTAKE_FILE', STORAGE_DIR . '/growth_intake.csv');
+define('PREMIUM_INTAKE_FILE', STORAGE_DIR . '/premium_intake.csv');
 define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
 define('BLOG_VIEWS_FILE', STORAGE_DIR . '/blog_views.csv');
 define('GEO_CACHE_FILE', STORAGE_DIR . '/geo_cache.json');
@@ -211,6 +212,18 @@ function append_growth_intake($row){
   ensure_csv_header(GROWTH_INTAKE_FILE,$header);
   if(!is_dir(dirname(GROWTH_INTAKE_FILE))) @mkdir(dirname(GROWTH_INTAKE_FILE),0755,true);
   $f=fopen(GROWTH_INTAKE_FILE,'a'); if(!$f) return false;
+  fputcsv($f,$row); fclose($f); return true;
+}
+
+function premium_intake_rows(){
+  $rows=csv_read_assoc_compat(PREMIUM_INTAKE_FILE);
+  return array_reverse($rows);
+}
+function append_premium_intake($row){
+  $header=['created_at','lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','decision_maker','decision_process','project_sponsor','business_overview','primary_goals','success_definition','current_tools','systems_in_use','data_sources','data_volume','data_owners','data_quality','data_cleanup_needed','historical_data_needed','departments_in_scope','dashboard_kpis','management_questions','dashboard_users','dashboard_devices','dashboard_permissions','reporting_cadence','report_exports','tracker_modules','customer_data','customer_journey','customer_followup_channels','customer_automation_needs','sales_process','payment_process','inventory_process','staff_operations','approval_processes','workflow_bottlenecks','automation_priorities','ai_use_cases','ai_boundaries','notification_channels','integrations_needed','api_access_status','existing_sops','documentation_needed','training_users','support_expectation','security_requirements','data_privacy_consent','access_method','sample_data_ready','implementation_timeline','urgency','budget_confirmed','payment_preference','stakeholder_availability','risks_concerns','extra_notes','ip','status'];
+  ensure_csv_header(PREMIUM_INTAKE_FILE,$header);
+  if(!is_dir(dirname(PREMIUM_INTAKE_FILE))) @mkdir(dirname(PREMIUM_INTAKE_FILE),0755,true);
+  $f=fopen(PREMIUM_INTAKE_FILE,'a'); if(!$f) return false;
   fputcsv($f,$row); fclose($f); return true;
 }
 
