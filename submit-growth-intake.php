@@ -20,5 +20,5 @@ if($data['lead_email'] && filter_var($data['lead_email'],FILTER_VALIDATE_EMAIL))
   $clientHtml="<div style='font-family:Arial,sans-serif;line-height:1.7;color:#061b31'><h2>Growth intake received</h2><p>Thank you, <strong>".gi_h($data['lead_name'])."</strong>. Lynxcom Analytics has received your Growth Dashboard & Workflow System questionnaire.</p><p>We will review your dashboard needs, trackers, workflow bottlenecks, data sources, reporting expectations, and implementation scope, then contact you with the next step.</p><p>Please do not send passwords, OTPs, card details, or private login credentials. If sample records are needed, we will request safe exports/files only.</p><p>Regards,<br><strong>Lynxcom Analytics</strong></p></div>";
   send_html_mail($data['lead_email'],'Your Lynxcom Growth intake was received',$clientHtml,$adminEmail);
 }
-header('Location: growth-intake.php?sent=1'); exit;
+header('Location: growth-thank-you.php?name='.rawurlencode($data['lead_name']).'&business='.rawurlencode($data['business_name'])); exit;
 ?>
