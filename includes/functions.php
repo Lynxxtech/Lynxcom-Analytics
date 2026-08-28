@@ -14,6 +14,7 @@ define('CONTENT_FILE', DATA_DIR . '/content.json');
 define('LEADS_FILE', STORAGE_DIR . '/leads.csv');
 define('SUPPORT_FILE', STORAGE_DIR . '/support.csv');
 define('STARTER_INTAKE_FILE', STORAGE_DIR . '/starter_intake.csv');
+define('FOUNDATION_INTAKE_FILE', STORAGE_DIR . '/foundation_intake.csv');
 define('GROWTH_INTAKE_FILE', STORAGE_DIR . '/growth_intake.csv');
 define('PREMIUM_INTAKE_FILE', STORAGE_DIR . '/premium_intake.csv');
 define('TRAFFIC_FILE', STORAGE_DIR . '/traffic.csv');
@@ -236,6 +237,18 @@ function append_starter_intake($row){
   ensure_csv_header(STARTER_INTAKE_FILE,$header);
   if(!is_dir(dirname(STARTER_INTAKE_FILE))) @mkdir(dirname(STARTER_INTAKE_FILE),0755,true);
   $f=fopen(STARTER_INTAKE_FILE,'a'); if(!$f) return false;
+  fputcsv($f,$row); fclose($f); return true;
+}
+
+function foundation_intake_rows(){
+  $rows=csv_read_assoc_compat(FOUNDATION_INTAKE_FILE);
+  return array_reverse($rows);
+}
+function append_foundation_intake($row){
+  $header=['created_at','lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','current_record_status','why_no_records','current_tools','daily_sales_process','customer_capture_process','payment_tracking_status','expense_tracking_status','stock_or_service_tracking','staff_task_tracking','followup_tracking_status','debtors_or_pending_payments','reports_needed','people_who_will_update','update_frequency','training_needed','preferred_tool','foundation_modules','automation_interest','dashboard_later_goal','success_definition','budget_confirmed','timeline','decision_maker','privacy_consent','extra_notes','ip','status'];
+  ensure_csv_header(FOUNDATION_INTAKE_FILE,$header);
+  if(!is_dir(dirname(FOUNDATION_INTAKE_FILE))) @mkdir(dirname(FOUNDATION_INTAKE_FILE),0755,true);
+  $f=fopen(FOUNDATION_INTAKE_FILE,'a'); if(!$f) return false;
   fputcsv($f,$row); fclose($f); return true;
 }
 
