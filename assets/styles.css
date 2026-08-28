@@ -236,3 +236,52 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
 .faq-premium-grid article p{
   margin-bottom:0!important;
 }
+
+/* Package section width/height adjustment from Collins screenshot */
+.packages-section .wrap{
+  width:min(1380px,calc(100% - 34px))!important;
+  max-width:1380px!important;
+}
+.packages-section{padding-top:84px!important;padding-bottom:92px!important;}
+.packages-header{margin-bottom:28px!important;}
+.premium-pricing{gap:16px!important;}
+.premium-price-card{
+  min-height:0!important;
+  height:auto!important;
+  padding:22px 22px 20px!important;
+  border-radius:20px!important;
+}
+.premium-price-card .badge{margin-bottom:14px!important;}
+.premium-price-card h3{
+  font-size:clamp(20px,1.65vw,25px)!important;
+  line-height:1.12!important;
+  margin:0 0 10px!important;
+}
+.premium-price-card .price{
+  font-size:clamp(22px,2vw,30px)!important;
+  line-height:1.05!important;
+  margin:0 0 14px!important;
+}
+.premium-price-card ul{
+  margin:0 0 18px!important;
+  padding-left:0!important;
+  gap:7px!important;
+}
+.premium-price-card li{
+  font-size:13.5px!important;
+  line-height:1.28!important;
+  margin-bottom:7px!important;
+}
+.premium-price-card .package-cta{
+  min-height:42px!important;
+  padding:10px 12px!important;
+  font-size:13px!important;
+}
+@media(max-width:1100px){
+  .packages-section .wrap{width:min(1120px,calc(100% - 32px))!important;}
+}
+@media(max-width:640px){
+  .packages-section{padding-top:68px!important;padding-bottom:72px!important;}
+  .premium-price-card{padding:22px 20px!important;}
+}
+
