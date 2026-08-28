@@ -148,3 +148,69 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
 @media(max-width:640px){
   .service-cards .service-card{flex:1 1 100%!important;max-width:100%!important;}
 }
+
+/* Site-wide even section alignment — balanced desktop rows */
+.service-cards,
+.premium-pricing,
+.process-flow,
+.faq-premium-grid,
+.audience-pills{
+  align-items:stretch!important;
+}
+
+/* 7 services: balanced 4 + centered 3 */
+.service-cards{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  gap:18px!important;
+}
+.service-cards .service-card{
+  flex:0 1 calc((100% - 54px)/4)!important;
+  max-width:calc((100% - 54px)/4)!important;
+}
+
+/* 4 packages: one clean equal row */
+.premium-pricing{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:18px!important;
+}
+.premium-pricing .premium-price-card{height:100%!important;}
+
+/* 5 process steps: one equal row */
+.process-flow{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:16px!important;
+}
+.process-flow article{height:100%!important;}
+
+/* 12 audience pills: clean 4 x 3 */
+.audience-pills{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+
+/* 9 FAQs: clean 3 x 3 instead of 4 + 4 + 1 */
+.faq-premium-grid{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:16px!important;
+}
+.faq-premium-grid article{height:100%!important;}
+
+@media(max-width:1100px){
+  .premium-pricing{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .process-flow{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  .faq-premium-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media(max-width:900px){
+  .service-cards .service-card{flex:0 1 calc((100% - 18px)/2)!important;max-width:calc((100% - 18px)/2)!important;}
+  .audience-pills{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+}
+@media(max-width:640px){
+  .service-cards .service-card{flex:1 1 100%!important;max-width:100%!important;}
+  .premium-pricing,.process-flow,.faq-premium-grid,.audience-pills{grid-template-columns:1fr!important;}
+}
