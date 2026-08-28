@@ -214,3 +214,7 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
   .service-cards .service-card{flex:1 1 100%!important;max-width:100%!important;}
   .premium-pricing,.process-flow,.faq-premium-grid,.audience-pills{grid-template-columns:1fr!important;}
 }
+
+/* Keep package cards top-aligned; featured card uses badge/color, not vertical offset */
+.premium-price-card.featured{transform:none!important;}
+.premium-price-card:hover{transform:translateY(-4px)!important;}
