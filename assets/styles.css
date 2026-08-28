@@ -227,7 +227,7 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
   display:flex!important;
   flex-direction:column!important;
 }
-.service-card{min-height:382px!important;}
+.service-card{min-height:400px!important;}
 .service-card .service-link,
 .premium-price-card .package-cta{
   margin-top:auto!important;
