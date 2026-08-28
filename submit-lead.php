@@ -26,6 +26,8 @@ if($email && filter_var($email,FILTER_VALIDATE_EMAIL)){
 $redirectUrl = 'index.php?sent=1#contact';
 if(trim($budget)==='₦75k–₦150k'){
   $redirectUrl = 'starter-intake.php?name='.rawurlencode($name).'&phone='.rawurlencode($phone).'&email='.rawurlencode($email).'&business='.rawurlencode($business);
+} elseif(trim($budget)==='₦180k–₦350k' || stripos($service,'Foundation')!==false || stripos($message,'no data')!==false || stripos($message,'no records')!==false){
+  $redirectUrl = 'foundation-intake.php?name='.rawurlencode($name).'&phone='.rawurlencode($phone).'&email='.rawurlencode($email).'&business='.rawurlencode($business);
 } elseif(trim($budget)==='₦200k–₦500k'){
   $redirectUrl = 'growth-intake.php?name='.rawurlencode($name).'&phone='.rawurlencode($phone).'&email='.rawurlencode($email).'&business='.rawurlencode($business);
 } elseif(trim($budget)==='₦600k–₦1.5m+' || stripos($budget,'600k')!==false || stripos($budget,'1.5m')!==false){
