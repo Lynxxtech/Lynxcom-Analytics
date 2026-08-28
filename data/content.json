@@ -24,6 +24,11 @@
       "body": "Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data."
     },
     {
+      "icon": "🧾",
+      "title": "Business record foundation",
+      "body": "For businesses without proper records, we create the right sales, customer, expense, payment, staff and follow-up tracking structure before dashboard insights."
+    },
+    {
       "icon": "🤖",
       "title": "AI workflow audit",
       "body": "Identify repetitive admin tasks, reporting delays, follow-up gaps and practical ways automation can reduce manual work."
@@ -50,6 +55,19 @@
         "Data cleanup",
         "Basic dashboard/reporting setup",
         "Automation opportunity report"
+      ]
+    },
+    {
+      "name": "Foundation",
+      "title": "Business Data Foundation & Tracking System",
+      "price": "₦180k–₦350k",
+      "items": [
+        "Sales/customer/expense record structure",
+        "Payment, debtor and follow-up trackers",
+        "Staff/task tracking template",
+        "Simple weekly management report format",
+        "Team usage guide and adoption support",
+        "Dashboard-readiness roadmap"
       ]
     },
     {
