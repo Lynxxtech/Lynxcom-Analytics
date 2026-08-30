@@ -52,15 +52,15 @@
   "packages": [
     {
       "name": "Starter",
-      "title": "Data Foundation & Starter Tracker",
+      "title": "Starter Tracker & Basic Web Dashboard",
       "price": "₦75k–₦150k",
       "items": [
         "Business process review",
         "Simple KPI list",
-        "Excel/Google Sheets record tracker",
-        "Basic dashboard/reporting view",
-        "Data entry guide",
-        "Automation opportunity report"
+        "Excel/Google Sheets data tracker",
+        "Basic client-facing web dashboard",
+        "Printable summary/report view",
+        "Data entry guide"
       ]
     },
     {
