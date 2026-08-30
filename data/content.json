@@ -1,22 +1,32 @@
 {
-  "brand": "Lynxcom Analytics",
-  "tagline": "Business Dashboards, Reporting & Workflow Automation Consulting",
-  "headline": "Turn scattered records into clear dashboards and smarter workflows.",
-  "subheadline": "We help businesses organize records, track performance, automate follow-up and turn reports into clearer management decisions.",
+  "brand": "LynxCom Analytics",
+  "tagline": "Data Collection Portals, Dashboards & Workflow Automation",
+  "headline": "Build a business system that records, tracks and reports clearly.",
+  "subheadline": "We help organizations collect records properly through trackers or online portals, then turn the data into client-facing dashboards, reports and follow-up workflows.",
   "phone_primary": "08136377667",
   "phone_secondary": "07060630333",
   "whatsapp": "2348136377667",
   "email": "hello@lynxcomanalytics.com",
   "services": [
     {
+      "icon": "🧾",
+      "title": "Business record foundation",
+      "body": "For clients with messy or missing records, we design the right sales, customer, payment, expense, staff and follow-up structure before dashboard work starts."
+    },
+    {
+      "icon": "🌐",
+      "title": "Online data collection portals",
+      "body": "Build simple portals and forms where staff can record admissions, payments, sales, customers, expenses, tasks and daily operations directly into the right structure."
+    },
+    {
       "icon": "📊",
-      "title": "Business dashboards",
-      "body": "Build practical dashboards for sales, revenue, customers, staff, inventory, payments and projects using the right tool for your business."
+      "title": "Custom web dashboards",
+      "body": "Create polished client-facing dashboards with KPI cards, charts, filters, drilldowns, debtor lists and action tables that look more professional than raw Excel."
     },
     {
       "icon": "🎯",
       "title": "KPI & management reports",
-      "body": "Define the numbers that matter and turn them into daily, weekly or monthly reports that managers can actually use."
+      "body": "Define the numbers that matter and turn them into daily, weekly or monthly reports owners and managers can use to make decisions."
     },
     {
       "icon": "🧹",
@@ -24,19 +34,14 @@
       "body": "Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data."
     },
     {
-      "icon": "🧾",
-      "title": "Business record foundation",
-      "body": "For businesses without proper records, we create the right sales, customer, expense, payment, staff and follow-up tracking structure before dashboard insights."
-    },
-    {
-      "icon": "🤖",
-      "title": "AI workflow audit",
-      "body": "Identify repetitive admin tasks, reporting delays, follow-up gaps and practical ways automation can reduce manual work."
-    },
-    {
       "icon": "⚙️",
       "title": "Workflow automation",
-      "body": "Design simple workflows for reminders, reports, forms, customer follow-up, staff updates and management alerts."
+      "body": "Design practical workflows for reminders, reports, approvals, customer follow-up, staff updates and management alerts."
+    },
+    {
+      "icon": "📌",
+      "title": "Action tracking systems",
+      "body": "Track who needs follow-up, what payment is pending, which customer or task needs action, and what staff should do next."
     },
     {
       "icon": "📈",
@@ -47,13 +52,14 @@
   "packages": [
     {
       "name": "Starter",
-      "title": "Dashboard & Automation Audit",
+      "title": "Data Foundation & Starter Tracker",
       "price": "₦75k–₦150k",
       "items": [
         "Business process review",
         "Simple KPI list",
-        "Data cleanup",
-        "Basic dashboard/reporting setup",
+        "Excel/Google Sheets record tracker",
+        "Basic dashboard/reporting view",
+        "Data entry guide",
         "Automation opportunity report"
       ]
     },
@@ -72,28 +78,28 @@
     },
     {
       "name": "Most popular",
-      "title": "Growth Dashboard & Workflow System",
+      "title": "Growth Data Portal & Web Dashboard",
       "price": "₦200k–₦500k",
       "featured": true,
       "items": [
-        "Full KPI dashboard",
+        "Online data collection portal/forms",
+        "Client-facing custom web dashboard",
         "Customer/staff/payment tracker",
+        "Debtor/follow-up action lists",
         "Reporting templates",
-        "Workflow automation plan",
-        "Weekly management report format",
         "Training/support session"
       ]
     },
     {
       "name": "Premium",
-      "title": "AI Operations System",
+      "title": "Full Operations Portal & Automation System",
       "price": "₦600k–₦1.5m+",
       "items": [
-        "Advanced dashboard",
+        "Advanced multi-section data portal",
+        "Private web dashboard with login",
         "Multi-department tracking",
         "Customer follow-up system",
         "Automated reporting workflow",
-        "AI workflow documentation",
         "Monthly review structure"
       ]
     }
