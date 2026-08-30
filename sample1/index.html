@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Crestfield Model Academy | LynxCom School Dashboard Demo</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="logo">LA</span><div><strong>LynxCom Analytics</strong><small>School portal + dashboard demo</small></div></div>
+  <nav><a href="#overview">Overview</a><a href="#fees">Fees</a><a href="#debtors">Debtors</a><a href="#operations">Operations</a><a href="#updates">Updates</a></nav>
+</header>
+<main>
+<section class="hero" id="overview">
+  <div>
+    <p class="eyebrow">Privacy-safe completed project sample</p>
+    <h1>School records portal + management dashboard</h1>
+    <p class="lead">A client-facing web dashboard for school owners to track students, fees, parents owing, boarding, admissions, expenses and follow-up actions from structured records.</p>
+    <div class="hero-actions"><a href="#debtors" class="btn primary">View parent debtors</a><a href="#updates" class="btn secondary">How updates work</a></div>
+  </div>
+  <aside class="hero-card"><span>Sample client</span><h2 id="schoolName">Crestfield Model Academy</h2><p>Primary school + full boarding secondary school. All records are dummy data.</p></aside>
+</section>
+<section class="kpi-grid" id="kpis"></section>
+<section class="grid two">
+  <article class="panel"><div class="panel-head"><h2>Enrollment by Class</h2><p>Owner sees student population distribution.</p></div><canvas id="enrollmentChart"></canvas></article>
+  <article class="panel"><div class="panel-head"><h2>Fee Collection Status</h2><p>Billed vs collected vs outstanding.</p></div><canvas id="feeStatusChart"></canvas></article>
+</section>
+<section class="panel" id="fees"><div class="panel-head"><h2>Fee Review by Class</h2><p>Find which classes are carrying the biggest unpaid balances.</p></div><canvas id="feeClassChart"></canvas></section>
+<section class="panel debtors" id="debtors">
+  <div class="panel-head split"><div><h2>Parent Debtors / Follow-up List</h2><p>Filter parents owing by class, priority or search name/phone. This is the action list for the bursar/owner.</p></div><div class="filters"><input id="debtorSearch" placeholder="Search student, parent, phone"><select id="classFilter"><option value="">All classes</option></select><select id="priorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Normal</option></select></div></div>
+  <div class="table-wrap"><table><thead><tr><th>Student</th><th>Class</th><th>Parent / Guardian</th><th>Phone</th><th>Outstanding</th><th>Priority</th><th>Recommended Action</th></tr></thead><tbody id="debtorsBody"></tbody></table></div>
+</section>
+<section class="grid three" id="operations">
+  <article class="panel"><div class="panel-head"><h2>Boarding Hostels</h2><p>Boarding population view.</p></div><canvas id="hostelChart"></canvas></article>
+  <article class="panel"><div class="panel-head"><h2>Admissions Pipeline</h2><p>Enquiry stage tracking.</p></div><canvas id="admissionChart"></canvas></article>
+  <article class="panel"><div class="panel-head"><h2>Expenses</h2><p>Top cost categories.</p></div><canvas id="expenseChart"></canvas></article>
+</section>
+<section class="updates" id="updates">
+  <div><p class="eyebrow">Going forward</p><h2>This is not a static dashboard.</h2><p>In a live client setup, staff record daily activities through structured trackers or online forms. The dashboard refreshes from those clean records so the owner can see current numbers and current actions.</p></div>
+  <ol id="updatePlan"></ol>
+</section>
+</main>
+<footer><strong>LynxCom Analytics</strong><span>Dummy-data dashboard demo. No real student, parent or school records are displayed.</span></footer>
+<script src="assets/app.js"></script>
+</body>
+</html>
