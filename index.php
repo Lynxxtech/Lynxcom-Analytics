@@ -1,4 +1,25 @@
-<?php require __DIR__.'/includes/functions.php'; track_visit('Homepage'); $c=load_content(); $wa=preg_replace('/\D/','',$c['whatsapp']??'2348136377667'); ?><!doctype html>
+<?php require __DIR__.'/includes/functions.php'; track_visit('Homepage'); $c=load_content();
+$c['brand']='LynxCom Analytics';
+$c['tagline']='Data Collection Portals, Dashboards & Workflow Automation';
+$c['headline']='Build a business system that records, tracks and reports clearly.';
+$c['subheadline']='We help organizations collect records properly through trackers or online portals, then turn the data into client-facing dashboards, reports and follow-up workflows.';
+$c['services']=[
+ ['icon'=>'🧾','title'=>'Business record foundation','body'=>'For clients with messy or missing records, we design the right sales, customer, payment, expense, staff and follow-up structure before dashboard work starts.'],
+ ['icon'=>'🌐','title'=>'Online data collection portals','body'=>'Build simple portals and forms where staff can record admissions, payments, sales, customers, expenses, tasks and daily operations directly into the right structure.'],
+ ['icon'=>'📊','title'=>'Custom web dashboards','body'=>'Create polished client-facing dashboards with KPI cards, charts, filters, drilldowns, debtor lists and action tables that look more professional than raw Excel.'],
+ ['icon'=>'🎯','title'=>'KPI & management reports','body'=>'Define the numbers that matter and turn them into daily, weekly or monthly reports owners and managers can use to make decisions.'],
+ ['icon'=>'🧹','title'=>'Data cleanup','body'=>'Clean messy spreadsheets, remove duplicates, merge records, structure customer lists and prepare reliable reporting data.'],
+ ['icon'=>'⚙️','title'=>'Workflow automation','body'=>'Design practical workflows for reminders, reports, approvals, customer follow-up, staff updates and management alerts.'],
+ ['icon'=>'📌','title'=>'Action tracking systems','body'=>'Track who needs follow-up, what payment is pending, which customer or task needs action, and what staff should do next.'],
+ ['icon'=>'📈','title'=>'Management insights','body'=>'Turn raw records into action: what improved, what dropped, who needs follow-up and what decision should be made next.']
+];
+$c['packages']=[
+ ['name'=>'Starter','title'=>'Data Foundation & Starter Tracker','price'=>'₦75k–₦150k','items'=>['Business process review','Simple KPI list','Excel/Google Sheets record tracker','Basic dashboard/reporting view','Data entry guide','Automation opportunity report']],
+ ['name'=>'Foundation','title'=>'Business Data Foundation & Tracking System','price'=>'₦180k–₦350k','items'=>['Sales/customer/expense record structure','Payment, debtor and follow-up trackers','Staff/task tracking template','Simple weekly management report format','Team usage guide and adoption support','Dashboard-readiness roadmap']],
+ ['name'=>'Most popular','title'=>'Growth Data Portal & Web Dashboard','price'=>'₦200k–₦500k','featured'=>true,'items'=>['Online data collection portal/forms','Client-facing custom web dashboard','Customer/staff/payment tracker','Debtor/follow-up action lists','Reporting templates','Training/support session']],
+ ['name'=>'Premium','title'=>'Full Operations Portal & Automation System','price'=>'₦600k–₦1.5m+','items'=>['Advanced multi-section data portal','Private web dashboard with login','Multi-department tracking','Customer follow-up system','Automated reporting workflow','Monthly review structure']]
+];
+$wa=preg_replace('/\D/','',$c['whatsapp']??'2348136377667'); ?><!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>LynxCom Analytics | Data Portals, Web Dashboards & Workflow Automation in Nigeria</title><link rel="canonical" href="https://lynxcomanalytics.com/">
 <meta name="description" content="LynxCom Analytics helps Nigerian businesses set up record structures, online data collection portals, client-facing web dashboards, KPI reports, workflow automation and follow-up tracking systems."><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="author" content="Lynxcom Analytics"><meta name="geo.region" content="NG"><meta name="geo.placename" content="Nigeria"><meta name="theme-color" content="#08275c">
 <meta property="og:type" content="website"><meta property="og:url" content="https://lynxcomanalytics.com/"><meta property="og:title" content="LynxCom Analytics | Data Portals & Web Dashboards in Nigeria"><meta property="og:description" content="Online data portals, client-facing web dashboards, KPI reporting, data cleanup and workflow automation for Nigerian businesses."><meta property="og:image" content="https://lynxcomanalytics.com/assets/slider-dashboard.jpg"><meta property="og:site_name" content="Lynxcom Analytics"><meta property="og:locale" content="en_NG">
