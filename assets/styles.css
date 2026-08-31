@@ -292,3 +292,7 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
 /* Homepage project samples teaser */
 .project-teaser-section{padding:72px 0;background:linear-gradient(180deg,#f7fbff,#ffffff);border-top:1px solid #e5edf5;border-bottom:1px solid #e5edf5}.project-teaser-box{display:flex;align-items:center;justify-content:space-between;gap:28px;background:#fff;border:1px solid rgba(11,79,216,.12);border-radius:28px;padding:30px;box-shadow:rgba(6,27,49,.08) 0 22px 58px -34px}.project-teaser-box h2{font-size:clamp(30px,4vw,48px);line-height:1.08;color:#061b31;margin:12px 0}.project-teaser-box p{max-width:760px;color:#5c6b80;font-size:17px;line-height:1.58;margin:0}.project-teaser-box .btn{white-space:nowrap}@media(max-width:760px){.project-teaser-box{display:block}.project-teaser-box .btn{margin-top:20px;width:100%}}
 
+
+
+/* Project page school sample feature card */
+.featured-school-sample{border-color:rgba(20,85,217,.28);background:linear-gradient(180deg,#fff,#f3f8ff)}.featured-school-sample:before{height:6px;background:linear-gradient(90deg,#1455d9,#14b8d4,#079455)}.project-card-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:14px}.project-card-actions .btn.small{padding:10px 14px;font-size:13px;border-radius:999px}.project-card-actions .btn.ghost{background:#fff;color:#1455d9;border:1px solid rgba(20,85,217,.22)}
