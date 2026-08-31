@@ -14,3 +14,6 @@
 
 .filter-reset{grid-column:1/-1;border:0;border-radius:999px;background:#061b31;color:#fff;font-weight:900;padding:11px 14px;cursor:pointer}.active-filter-note{grid-column:1/-1;background:#fff6d8;border:1px solid #efd27a;color:#6d4700;border-radius:14px;padding:10px 12px!important;font-size:13px;font-weight:800}.chart-box canvas{cursor:pointer}.card-head span:after{content:' • click chart to explore';color:#1455d9;font-weight:900}
 @media print{.filter-reset,.active-filter-note{display:none!important}.card-head span:after{content:''}}
+
+
+.sample-brand-logo{display:inline-flex;align-items:center;flex:0 0 auto;text-decoration:none}.sample-brand-logo img{height:48px;width:auto;display:block}.report-brand{gap:14px}.report-brand .logo{display:none}@media(max-width:720px){.sample-brand-logo img{height:42px}}
