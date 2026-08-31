@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Crestfield Model Academy | School Management Report Dashboard</title>
-  <link rel="stylesheet" href="assets/styles.css?v=interactive-live-20260831b">
+  <link rel="stylesheet" href="assets/styles.css?v=chart-click-filter-20260831">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
@@ -23,6 +23,8 @@
       <label>Session<select id="sessionSelect"><option value="2025/2026">2025/2026</option><option value="2024/2025">2024/2025</option><option value="2023/2024">2023/2024</option></select></label>
       <label>Term<select id="termSelect"><option value="All Terms">All Terms</option><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Third Term">Third Term</option></select></label>
       <label>Class<select id="globalClassFilter"><option value="">All classes</option></select></label>
+      <button type="button" id="resetFilters" class="filter-reset">Reset filters</button>
+      <p id="activeFilterNote" class="active-filter-note">Click a class bar such as P2, JSS 1 or SS 2 to filter the dashboard.</p>
     </div>
   </section>
   <section class="report-card-grid" id="kpis"></section>
@@ -45,6 +47,6 @@
 </main>
 <footer class="report-footer"><strong>LynxCom Analytics</strong><span>Sample report dashboard powered by dummy data.</span></footer>
 <div id="debtorModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><button type="button" class="modal-close" id="modalClose" aria-label="Close debtor details">×</button><div id="modalContent"></div></div></div>
-<script src="assets/app.js?v=interactive-live-20260831b"></script>
+<script src="assets/app.js?v=chart-click-filter-20260831"></script>
 </body>
 </html>
