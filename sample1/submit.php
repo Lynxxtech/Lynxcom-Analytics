@@ -87,7 +87,7 @@ if($formType==='Fee_Payments' || $formType==='Students'){
 }
 
 if($formType==='Fee_Payments'){
-  $row=[$timestamp,$studentId,$master['name'],$master['gender'] ?: clean($_POST['gender']??''),$master['class'] ?: clean($_POST['class']??''),$master['guardian'], $master['phone'], clean($_POST['term']??''), clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')];
+  $row=[$timestamp,$studentId,$master['name'],$master['gender'] ?: clean($_POST['gender']??''),$master['class'] ?: clean($_POST['class']??''),$master['guardian'], $master['phone'], clean($_POST['term']??''), clean($_POST['expected_amount']??''), clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')];
   if(!write_csv('Fee_Payments',$row)) safe_redirect('error','fee');
   post_webhook('Fee_Payments',$row); safe_redirect('success','fee');
 }
