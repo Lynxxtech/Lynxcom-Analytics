@@ -7,15 +7,15 @@ $base = __DIR__ . '/submissions';
 if(!is_dir($base)) @mkdir($base, 0755, true);
 $timestamp = date('Y-m-d H:i:s');
 $rows = [
- 'Admissions' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['applying_class']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['source']??''), clean($_POST['stage']??''), 'Pending', clean($_POST['notes']??'')],
- 'Fee_Payments' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['student_id']??''), clean($_POST['class']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['term']??''), clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')],
+ 'Admissions' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['applying_class']??''), clean($_POST['gender']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['source']??''), clean($_POST['stage']??''), 'Pending', clean($_POST['notes']??'')],
+ 'Fee_Payments' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['student_id']??''), clean($_POST['gender']??''), clean($_POST['class']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['term']??''), clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')],
  'Expenses' => [$timestamp, clean($_POST['expense_date']??''), clean($_POST['category']??''), clean($_POST['description']??''), clean($_POST['amount']??''), clean($_POST['paid_by']??''), clean($_POST['payment_method']??''), clean($_POST['notes']??'')],
- 'Attendance' => [$timestamp, clean($_POST['date']??''), clean($_POST['class']??''), clean($_POST['section']??''), clean($_POST['total_students']??''), clean($_POST['present']??''), clean($_POST['absent']??''), '', clean($_POST['notes']??'')],
- 'Students' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['student_id']??''), clean($_POST['class']??''), clean($_POST['section']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['status']??''), clean($_POST['notes']??'')]
+ 'Attendance' => [$timestamp, clean($_POST['date']??''), clean($_POST['class']??''), clean($_POST['gender']??''), clean($_POST['section']??''), clean($_POST['total_students']??''), clean($_POST['present']??''), clean($_POST['absent']??''), '', clean($_POST['notes']??'')],
+ 'Students' => [$timestamp, clean($_POST['student_name']??''), clean($_POST['student_id']??''), clean($_POST['gender']??''), clean($_POST['class']??''), clean($_POST['section']??''), clean($_POST['guardian']??''), clean($_POST['phone']??''), clean($_POST['status']??''), clean($_POST['notes']??'')]
 ];
 $row = $rows[$formType];
 if($formType==='Attendance'){
-  $total=(float)$row[4]; $present=(float)$row[5]; $row[7]=$total>0 ? round(($present/$total)*100,1) : '';
+  $total=(float)$row[5]; $present=(float)$row[6]; $row[8]=$total>0 ? round(($present/$total)*100,1) : '';
 }
 $file = $base . '/' . $formType . '.csv';
 $fp = fopen($file, 'a');
