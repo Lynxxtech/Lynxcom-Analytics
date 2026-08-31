@@ -7,9 +7,15 @@ function safe_redirect($status,$form='admissions',$extra=''){
 }
 function load_valid_students(){
   $students=[];
+  $classExpected=[];
   $dataFile=__DIR__ . '/data/dashboard-data.json';
   if(is_file($dataFile)){
     $data=json_decode(file_get_contents($dataFile), true);
+    foreach(($data['charts']['fee_by_class'] ?? []) as $feeRow){
+      $className=clean($feeRow['class'] ?? ''); $studentCount=0;
+      foreach(($data['charts']['enrollment_by_class'] ?? []) as $enrollRow){ if(($enrollRow['label'] ?? '') === $className) $studentCount=(int)($enrollRow['value'] ?? 0); }
+      if($className && $studentCount>0) $classExpected[$className]=round(((float)($feeRow['billed'] ?? 0))/$studentCount);
+    }
     foreach(($data['debtors'] ?? []) as $d){
       $id=clean($d['student_id'] ?? '');
       if($id){
@@ -19,7 +25,8 @@ function load_valid_students(){
           'gender'=>clean($d['gender'] ?? ''),
           'guardian'=>clean($d['guardian_name'] ?? ''),
           'phone'=>clean($d['guardian_phone'] ?? ''),
-          'section'=>clean($d['section'] ?? '')
+          'section'=>clean($d['section'] ?? ''),
+          'expected_amount'=>clean($d['amount_billed'] ?? ($classExpected[clean($d['class'] ?? '')] ?? ''))
         ];
       }
     }
@@ -32,7 +39,7 @@ function load_valid_students(){
         $id=clean($row[1] ?? ''); $stage=clean($row[8] ?? '');
         if($id && strcasecmp($stage,'Admitted')===0){
           $class=clean($row[3] ?? '');
-          $students[$id]=['name'=>clean($row[2]??''),'class'=>$class,'gender'=>clean($row[4]??''),'guardian'=>clean($row[5]??''),'phone'=>clean($row[6]??''),'section'=>str_starts_with($class,'Primary')?'Primary':'Secondary Boarding'];
+          $students[$id]=['name'=>clean($row[2]??''),'class'=>$class,'gender'=>clean($row[4]??''),'guardian'=>clean($row[5]??''),'phone'=>clean($row[6]??''),'section'=>str_starts_with($class,'Primary')?'Primary':'Secondary Boarding','expected_amount'=>$classExpected[$class] ?? ''];
         }
       }
     }
@@ -87,7 +94,8 @@ if($formType==='Fee_Payments' || $formType==='Students'){
 }
 
 if($formType==='Fee_Payments'){
-  $row=[$timestamp,$studentId,$master['name'],$master['gender'] ?: clean($_POST['gender']??''),$master['class'] ?: clean($_POST['class']??''),$master['guardian'], $master['phone'], clean($_POST['term']??''), clean($_POST['expected_amount']??''), clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')];
+  $expectedAmount = clean($master['expected_amount'] ?? '');
+  $row=[$timestamp,$studentId,$master['name'],$master['gender'] ?: clean($_POST['gender']??''),$master['class'] ?: clean($_POST['class']??''),$master['guardian'], $master['phone'], clean($_POST['term']??''), $expectedAmount, clean($_POST['amount_paid']??''), clean($_POST['payment_method']??''), clean($_POST['receipt_no']??''), clean($_POST['notes']??'')];
   if(!write_csv('Fee_Payments',$row)) safe_redirect('error','fee');
   post_webhook('Fee_Payments',$row); safe_redirect('success','fee');
 }
