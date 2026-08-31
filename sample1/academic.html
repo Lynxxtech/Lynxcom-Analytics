@@ -19,11 +19,12 @@
   </section>
 
   <section class="control-panel" aria-label="Academic dashboard filters">
-    <div><p class="eyebrow mini">Academic filters</p><h2>Filter by session, term and class.</h2><p>Class and subject charts are clickable so management can drill into weak areas quickly.</p></div>
+    <div><p class="eyebrow mini">Academic filters</p><h2>Filter by session, term, class and subject.</h2><p>Use these filters to rank top students across the board, or narrow to Top 3 in Mathematics, SS 1, a term, or any selected class/subject.</p></div>
     <div class="global-filters">
       <label>Session<select id="academicSession"><option value="2025/2026">2025/2026</option><option value="2024/2025">2024/2025</option><option value="2023/2024">2023/2024</option></select></label>
       <label>Term<select id="academicTerm"><option value="All Terms">All Terms</option><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Third Term">Third Term</option></select></label>
       <label>Class<select id="academicClass"><option value="">All classes</option></select></label>
+      <label>Subject<select id="academicSubjectTop"><option value="">All subjects</option></select></label>
       <button type="button" id="academicReset" class="filter-reset">Reset academic filters</button>
       <p id="academicFilterNote" class="active-filter-note">Click a class bar or weak-subject row to focus the academic report.</p>
     </div>
@@ -51,6 +52,6 @@
 </main>
 <footer class="report-footer"><strong>LynxCom Analytics</strong><span>Academic sample dashboard powered by dummy education data.</span></footer>
 <div id="academicModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="academicModalTitle"><div class="modal-card"><button type="button" class="modal-close" id="academicModalClose" aria-label="Close academic student listing">×</button><div id="academicModalContent"></div></div></div>
-<script src="assets/academic.js?v=academic-top3-students-20260831"></script>
+<script src="assets/academic.js?v=academic-top3-board-20260831"></script>
 </body>
 </html>
