@@ -4,18 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Crestfield Model Academy | School Management Report Dashboard</title>
-  <link rel="stylesheet" href="assets/styles.css?v=report-cards-20260831">
+  <link rel="stylesheet" href="assets/styles.css?v=interactive-live-20260831">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 <header class="report-top">
   <div class="report-brand"><span class="logo">LA</span><div><strong>LynxCom Analytics</strong><small>Privacy-safe school dashboard demo</small></div></div>
-  <div class="report-meta"><b>Crestfield Model Academy</b><span>Management Report Dashboard</span></div>
+  <div class="report-meta"><b>Crestfield Model Academy</b><span>Management Report Dashboard</span><a class="portal-link" href="portal.php">Open Data Entry Portal</a><button type="button" id="printReportTop" class="portal-link print-link">Print / Download</button></div>
 </header>
 <main class="report-page">
   <section class="report-title-card">
-    <div><p class="eyebrow">Completed project sample</p><h1>School Management Report Dashboard</h1><p>This report-style dashboard helps the school owner track students, fee collection, outstanding balances, parents owing, admissions, boarding, expenses and weekly actions from structured records.</p></div>
+    <div><p class="eyebrow">Completed project sample</p><h1>School Management Report Dashboard</h1><p>This report-style dashboard helps the school owner track students, fee collection, outstanding balances, parents owing, admissions, boarding, expenses and weekly actions from structured records. Staff can use the sample data-entry portal to capture new records.</p><div class="hero-actions"><button type="button" id="printReportHero" class="report-btn">Print / Download report</button></div></div>
     <aside><span>Report status</span><strong>Demo data only</strong><small>No real school, student, parent or financial records are shown.</small></aside>
+  </section>
+  <section class="control-panel" aria-label="Dashboard filters">
+    <div><p class="eyebrow mini">Interactive demo controls</p><h2>Filter the dashboard by session, term and class.</h2><p>Use these controls to refresh the KPI cards, charts and debtor follow-up list like a real client dashboard.</p></div>
+    <div class="global-filters">
+      <label>Session<select id="sessionSelect"><option value="2025/2026">2025/2026</option><option value="2024/2025">2024/2025</option><option value="2023/2024">2023/2024</option></select></label>
+      <label>Term<select id="termSelect"><option value="All Terms">All Terms</option><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Third Term">Third Term</option></select></label>
+      <label>Class<select id="globalClassFilter"><option value="">All classes</option></select></label>
+    </div>
   </section>
   <section class="report-card-grid" id="kpis"></section>
   <section class="report-section two-col">
@@ -24,9 +32,9 @@
   </section>
   <section class="report-card" id="fees"><div class="card-head"><div><h2>Fee Review by Class</h2><span>Shows which classes carry the highest unpaid balances.</span></div></div><div class="chart-box wide"><canvas id="feeClassChart"></canvas></div></section>
   <section class="report-card" id="debtors">
-    <div class="card-head split"><div><h2>Parent Debtors / Follow-up Table</h2><span>The bursar/owner uses this as the action list for parents owing fees.</span></div><div class="filters"><input id="debtorSearch" placeholder="Search student, parent or phone"><select id="classFilter"><option value="">All classes</option></select><select id="priorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Normal</option></select></div></div>
+    <div class="card-head split"><div><h2>Parent Debtors / Follow-up Table</h2><span>The bursar/owner uses this as the action list. Click Details to open the debtor drilldown modal.</span></div><div class="filters"><input id="debtorSearch" placeholder="Search student, parent or phone"><select id="classFilter"><option value="">All classes</option></select><select id="priorityFilter"><option value="">All priorities</option><option>High</option><option>Medium</option><option>Normal</option></select></div></div>
     <div class="summary-strip"><div><b id="visibleDebtors">0</b><span>visible debtor rows</span></div><div><b id="totalDebt">₦0</b><span>outstanding in current view</span></div><div><b>407</b><span>total parents/students owing</span></div></div>
-    <div class="table-card"><table><thead><tr><th>Student</th><th>Class</th><th>Parent / Guardian</th><th>Phone</th><th>Outstanding</th><th>Priority</th><th>Recommended Action</th></tr></thead><tbody id="debtorsBody"></tbody></table></div>
+    <div class="table-card"><table><thead><tr><th>Student</th><th>Class</th><th>Parent / Guardian</th><th>Phone</th><th>Outstanding</th><th>Priority</th><th>Recommended Action</th><th>Drilldown</th></tr></thead><tbody id="debtorsBody"></tbody></table></div>
   </section>
   <section class="report-section three-col" id="operations">
     <article class="report-card"><div class="card-head"><h2>Boarding Hostels</h2><span>Hostel occupancy</span></div><div class="chart-box small"><canvas id="hostelChart"></canvas></div></article>
@@ -36,6 +44,7 @@
   <section class="report-card update-card" id="updates"><div><p class="eyebrow">Update workflow</p><h2>This is not a static past-record dashboard.</h2><p>For a live school client, staff continue entering admissions, payments, invoices, attendance and expenses through structured trackers or online forms. The report dashboard refreshes from those records.</p></div><ol id="updatePlan"></ol></section>
 </main>
 <footer class="report-footer"><strong>LynxCom Analytics</strong><span>Sample report dashboard powered by dummy data.</span></footer>
-<script src="assets/app.js?v=report-cards-20260831"></script>
+<div id="debtorModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><button type="button" class="modal-close" id="modalClose" aria-label="Close debtor details">×</button><div id="modalContent"></div></div></div>
+<script src="assets/app.js?v=interactive-live-20260831"></script>
 </body>
 </html>
