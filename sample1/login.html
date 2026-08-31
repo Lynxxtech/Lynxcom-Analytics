@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Crestfield Model Academy | Role-Based Access Demo</title>
+  <link rel="stylesheet" href="assets/styles.css?v=starter-role-access-20260831">
+</head>
+<body class="role-login-page">
+<header class="report-top">
+  <div class="report-brand"><a class="sample-brand-logo" href="../" aria-label="LynxCom Analytics home"><img src="../assets/lynxcom-logo.svg" alt="LynxCom Analytics logo"></a><div><strong>LynxCom Analytics</strong><small>Role-based school dashboard demo</small></div></div>
+  <div class="report-meta"><b>Crestfield Model Academy</b><span>Starter role access preview</span><a class="portal-link" href="index.html">Finance</a><a class="portal-link" href="academic.html">Academic</a></div>
+</header>
+<main class="report-page role-login-shell">
+  <section class="report-title-card role-hero">
+    <div><p class="eyebrow">Starter package demo</p><h1>Role-Based School Access</h1><p>This preview shows how one school system can route the proprietor, principal, class teacher and bursar to the dashboard each person needs — without exposing unnecessary records.</p><div class="hero-actions"><a class="report-btn" href="academic.html?role=owner">Enter as Owner</a><a class="report-btn secondary" href="academic.html?role=teacher&class=JSS%202">Preview Class Teacher</a></div></div>
+    <aside><span>Demo note</span><strong>No real passwords</strong><small>Production setup will use real staff accounts, stronger authentication and school-specific permissions.</small></aside>
+  </section>
+  <section class="role-grid" aria-label="Demo role access options">
+    <article class="role-card owner"><span>Owner / Proprietor</span><h2>Full School Control</h2><p>Access both academic and finance dashboards, the data entry portal, drilldowns and print/download reports.</p><ul><li>Academic dashboard</li><li>Finance dashboard</li><li>Data entry portal</li><li>Overall school reports</li></ul><button data-demo-login="owner" data-destination="index.html?role=owner">Login as Owner</button></article>
+    <article class="role-card principal"><span>Principal / Head Teacher</span><h2>Academic Oversight</h2><p>Monitor class performance, weak subjects, at-risk learners, top students and result trends.</p><ul><li>Academic dashboard</li><li>Class/subject drilldowns</li><li>At-risk follow-up</li><li>Result print/download</li></ul><button data-demo-login="principal" data-destination="academic.html?role=principal">Login as Principal</button></article>
+    <article class="role-card teacher"><span>Class Teacher</span><h2>Assigned Class View</h2><p>View only the assigned class performance dashboard and print class/student results for term-end follow-up.</p><ul><li>Assigned class only</li><li>Student result list</li><li>Parent follow-up list</li><li>Print class results</li></ul><button data-demo-login="teacher" data-destination="academic.html?role=teacher&class=JSS%202">Login as JSS 2 Teacher</button></article>
+    <article class="role-card bursar"><span>Bursar / Accountant</span><h2>Finance Operations</h2><p>Track fee collection, expected vs paid, debtors, expenses and parent payment follow-up.</p><ul><li>Finance dashboard</li><li>Debtors drilldown</li><li>Fee/payment forms</li><li>Expense records</li></ul><button data-demo-login="bursar" data-destination="index.html?role=bursar">Login as Bursar</button></article>
+  </section>
+  <section class="report-card update-card"><div><p class="eyebrow">Package positioning</p><h2>Starter shows the workflow; Growth/Premium makes it production-grade.</h2><p>This keeps the starter sample impressive but honest: demo role routing now, real staff accounts and database permissions in higher packages.</p></div><ol><li>Starter: demo login roles and dashboard routing.</li><li>Growth: real staff accounts, result history and permission rules.</li><li>Premium: parent portal, SMS/email notifications and multi-branch reporting.</li></ol></section>
+</main>
+<footer class="report-footer"><strong>LynxCom Analytics</strong><span>Role-based access sample powered by dummy school data.</span></footer>
+<script src="assets/roles.js?v=starter-role-access-20260831"></script>
+</body>
+</html>

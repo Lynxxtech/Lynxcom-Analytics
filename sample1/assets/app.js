@@ -7,7 +7,7 @@ const sessionProfile={'2025/2026':{collection:81.1,debtors:1},'2024/2025':{colle
 const termCollectionAdjust={'All Terms':0,'First Term':1.6,'Second Term':-.7,'Third Term':-2.3};
 const termDebtorFactor={'All Terms':1,'First Term':.38,'Second Term':.34,'Third Term':.28};
 let DATA, debtors=[], charts={}, currentDebtorRows=[];
-fetch('data/dashboard-data.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{DATA=data; debtors=data.debtors; render();});
+fetch('data/dashboard-data.json',{cache:'no-store'}).then(r=>r.json()).then(data=>{DATA=data; debtors=data.debtors; window.LynxRole?.init('finance'); render();});
 function chart(id,type,labels,datasets,options={}){if(charts[id]) charts[id].destroy(); const canvas=document.getElementById(id); canvas.style.cursor=options.onClick?'pointer':'default'; charts[id]=new Chart(canvas,{type,data:{labels,datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}},...options}})}
 function activeFilters(){return {session:document.getElementById('sessionSelect')?.value||'2025/2026',term:document.getElementById('termSelect')?.value||'All Terms',className:document.getElementById('globalClassFilter')?.value||''};}
 function filterFactor(){const f=activeFilters(); return (sessionFactor[f.session]||1)*(termFactor[f.term]||1);}
