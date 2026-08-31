@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Crestfield Model Academy | Academic Performance Dashboard</title>
+  <link rel="stylesheet" href="assets/styles.css?v=academic-dashboard-20260831">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="report-top">
+  <div class="report-brand"><a class="sample-brand-logo" href="../" aria-label="LynxCom Analytics home"><img src="../assets/lynxcom-logo.svg" alt="LynxCom Analytics logo"></a><div><strong>LynxCom Analytics</strong><small>Privacy-safe academic dashboard demo</small></div></div>
+  <div class="report-meta"><b>Crestfield Model Academy</b><span>Academic Performance Dashboard</span><a class="portal-link" href="index.html">Admin / Finance Dashboard</a><a class="portal-link" href="portal.php?form=results">Enter Results</a><button type="button" id="printAcademic" class="portal-link print-link">Print / Download</button></div>
+</header>
+<main class="report-page academic-page">
+  <section class="report-title-card academic-hero">
+    <div><p class="eyebrow">Separate academic report</p><h1>Academic Performance Dashboard</h1><p>This dashboard helps the school owner and academic head monitor learning quality separately from finance: average score, pass rate, weak subjects, top classes, at-risk learners and term-by-term result trends.</p><div class="hero-actions"><a class="report-btn" href="portal.php?form=results">Open Result Entry Form</a><a class="report-btn secondary" href="index.html">Back to Admin Dashboard</a></div></div>
+    <aside><span>Reporting focus</span><strong>Learning outcomes</strong><small>Form page stays the same. Academic records entered in the portal feed this separate report view.</small></aside>
+  </section>
+
+  <section class="control-panel" aria-label="Academic dashboard filters">
+    <div><p class="eyebrow mini">Academic filters</p><h2>Filter by session, term and class.</h2><p>Class and subject charts are clickable so management can drill into weak areas quickly.</p></div>
+    <div class="global-filters">
+      <label>Session<select id="academicSession"><option value="2025/2026">2025/2026</option><option value="2024/2025">2024/2025</option><option value="2023/2024">2023/2024</option></select></label>
+      <label>Term<select id="academicTerm"><option value="All Terms">All Terms</option><option value="First Term">First Term</option><option value="Second Term">Second Term</option><option value="Third Term">Third Term</option></select></label>
+      <label>Class<select id="academicClass"><option value="">All classes</option></select></label>
+      <button type="button" id="academicReset" class="filter-reset">Reset academic filters</button>
+      <p id="academicFilterNote" class="active-filter-note">Click a class bar or weak-subject row to focus the academic report.</p>
+    </div>
+  </section>
+
+  <section class="report-card-grid academic-kpis" id="academicKpis"></section>
+
+  <section class="report-section two-col">
+    <article class="report-card"><div class="card-head"><h2>Average Score by Class</h2><span>Click a class to filter</span></div><div class="chart-box"><canvas id="classScoreChart"></canvas></div></article>
+    <article class="report-card"><div class="card-head"><h2>Subject Performance</h2><span>Weak subject view</span></div><div class="chart-box"><canvas id="subjectScoreChart"></canvas></div></article>
+  </section>
+
+  <section class="report-section two-col">
+    <article class="report-card"><div class="card-head"><h2>Grade Distribution</h2><span>A–F split</span></div><div class="chart-box"><canvas id="gradeChart"></canvas></div></article>
+    <article class="report-card"><div class="card-head"><h2>Result Trend by Term</h2><span>Average score and pass rate</span></div><div class="chart-box"><canvas id="trendChart"></canvas></div></article>
+  </section>
+
+  <section class="report-card" id="academicTableCard">
+    <div class="card-head split"><div><h2>Class / Subject Performance Table</h2><span>At-risk areas and recommended academic action.</span></div><div class="filters"><input id="academicSearch" placeholder="Search class, subject or teacher"><select id="subjectFilter"><option value="">All subjects</option></select><select id="riskFilter"><option value="">All risk levels</option><option>High</option><option>Medium</option><option>Normal</option></select></div></div>
+    <div class="summary-strip"><div><b id="visibleAcademicRows">0</b><span>visible rows</span></div><div><b id="weakSubjectCount">0</b><span>weak subject/class pairs</span></div><div><b id="atRiskStudentCount">0</b><span>estimated at-risk students</span></div></div>
+    <div class="table-card"><table><thead><tr><th>Class</th><th>Subject</th><th>Teacher</th><th>Avg Score</th><th>Pass Rate</th><th>At-risk Students</th><th>Risk</th><th>Recommended Action</th></tr></thead><tbody id="academicBody"></tbody></table></div>
+  </section>
+
+  <section class="report-card update-card"><div><p class="eyebrow">Client explanation</p><h2>Academic reporting is separate from business reporting.</h2><p>The same data-entry portal captures results, but this dashboard gives the proprietor and head teacher a focused view of learning outcomes without mixing it with fees, expenses and debtors.</p></div><ol><li>Teachers or admin enter results through the Result / Assessment form.</li><li>The academic dashboard tracks class, subject, teacher and term performance.</li><li>Weak subjects and at-risk students become action items for management.</li></ol></section>
+</main>
+<footer class="report-footer"><strong>LynxCom Analytics</strong><span>Academic sample dashboard powered by dummy education data.</span></footer>
+<script src="assets/academic.js?v=academic-dashboard-20260831"></script>
+</body>
+</html>

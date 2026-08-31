@@ -20,3 +20,4 @@
 
 
 .integrity-help{margin:-4px 0 2px!important;background:#eef6ff;border:1px solid #bfdbfe;color:#0b4fd8;border-radius:12px;padding:10px 12px!important;font-size:13px;font-weight:800}.student-id-select:disabled{background:#f1f5f9;color:#94a3b8;cursor:not-allowed}
+.report-btn.secondary{background:#fff;color:var(--blue);border:1px solid rgba(20,85,217,.25);box-shadow:none;text-decoration:none}.academic-hero{border-top-color:#079455;background:linear-gradient(135deg,#fff,#f0fff7)}.academic-page .report-card{border-color:#d8ecdf}.academic-kpis .metric-card strong{color:#079455}.pill.High{background:#fee4e2;color:#b42318}.pill.Medium{background:#fff6d8;color:#92400e}.pill.Normal{background:#eaf7ee;color:#067647}
