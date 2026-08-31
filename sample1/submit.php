@@ -82,6 +82,8 @@ if($formType==='Fee_Payments' || $formType==='Students'){
   $studentId=clean($_POST['student_id'] ?? '');
   if(!$studentId || !isset($validStudents[$studentId])) safe_redirect('not_admitted',$formType==='Students'?'student':'fee');
   $master=$validStudents[$studentId];
+  $selectedClass=clean($_POST['class'] ?? '');
+  if($selectedClass && !empty($master['class']) && $selectedClass !== $master['class']) safe_redirect('class_mismatch',$formType==='Students'?'student':'fee');
 }
 
 if($formType==='Fee_Payments'){

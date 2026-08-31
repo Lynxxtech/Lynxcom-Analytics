@@ -17,3 +17,6 @@
 
 
 .sample-brand-logo{display:inline-flex;align-items:center;flex:0 0 auto;text-decoration:none}.sample-brand-logo img{height:48px;width:auto;display:block}.report-brand{gap:14px}.report-brand .logo{display:none}@media(max-width:720px){.sample-brand-logo img{height:42px}}
+
+
+.integrity-help{margin:-4px 0 2px!important;background:#eef6ff;border:1px solid #bfdbfe;color:#0b4fd8;border-radius:12px;padding:10px 12px!important;font-size:13px;font-weight:800}.student-id-select:disabled{background:#f1f5f9;color:#94a3b8;cursor:not-allowed}
