@@ -28,3 +28,7 @@ html,body{max-width:100%;overflow-x:hidden}.shell,.topbar,.hero,.filters,.comman
 
 /* hospital date + specialty drilldown v7 */
 .filters.dateFilters{grid-template-columns:repeat(4,minmax(0,1fr)) auto}.filters input[type="date"]{height:44px;border:1px solid #cfddec;border-radius:14px;background:#fff;padding:0 12px;font-weight:800;color:#0b1220}.rangeBadge{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.11);color:#fff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;margin-bottom:10px}.specialtyDrillStrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}.specialtyDrillStrip div{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.08);border-radius:16px;padding:10px}.specialtyDrillStrip b{display:block;font-size:18px}.specialtyDrillStrip span{display:block;color:rgba(255,255,255,.72);font-size:11px;margin-top:2px}.specialtyFilterNote{font-size:12px;font-weight:900;color:#1849a9;background:#eef6ff;border:1px solid #d6e9ff;border-radius:12px;padding:8px 10px;margin:8px 0 0}.tableWrap tr{cursor:pointer}@media(max-width:1200px){.filters.dateFilters{grid-template-columns:repeat(2,minmax(0,1fr))}.filters.dateFilters button{grid-column:auto}}@media(max-width:760px){.filters.dateFilters,.specialtyDrillStrip{grid-template-columns:1fr}.filters.dateFilters button{width:100%}}
+
+
+/* hospital true date range v8 */
+.rangeBadge strong{font-weight:950}.dateFilters input[type="date"]{min-width:150px}.kpiHint strong{color:#0b5cad}
