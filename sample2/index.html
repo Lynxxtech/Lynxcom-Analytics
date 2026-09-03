@@ -6,7 +6,7 @@
 <meta name="description" content="Fictional specialist hospital dashboard sample for patient flow, revenue, billing, lab, pharmacy, admissions, roles and follow-up operations.">
 <link rel="preconnect" href="https://cdn.plot.ly">
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
-<link rel="stylesheet" href="assets/styles.css?v=hospital-command-v4">
+<link rel="stylesheet" href="assets/styles.css?v=hospital-ops-suite-v5">
 </head>
 <body>
 <header class="topbar"><a class="brand" href="../"><img src="../assets/lynxcom-logo.svg" alt="LynxCom Analytics"><span>Healthcare Operations Sample</span></a><nav><a href="login.html">Role demo</a><a href="index.html">Dashboard</a><a href="portal.php">Data Entry Portal</a><a href="../project-samples.php">Projects</a></nav></header>
@@ -25,5 +25,5 @@
 <section class="panel"><div class="panelHead"><div><h2>Latest Patient Visits</h2><p>Searchable operational table for front desk/admin review.</p></div><input id="tableSearch" placeholder="Search patient, doctor, specialty…"></div><div class="tableWrap" id="visitTable"></div></section>
 <section class="panel"><div class="panelHead"><div><h2>Billing & Follow-up Drilldowns</h2><p>Sample records for billing action and patient follow-up.</p></div></div><div class="layout twoGrid"><div><h3>Recent invoices</h3><div class="tableWrap" id="invoiceTable"></div></div><div><h3>Patient follow-ups</h3><div class="tableWrap" id="followupTable"></div></div></div></section>
 </main><div class="listingModal" id="listingModal" aria-hidden="true"><div class="listingBackdrop" onclick="closeListing()"></div><section class="listingDialog" role="dialog" aria-modal="true" aria-labelledby="listingTitle"><button class="modalClose" onclick="closeListing()" aria-label="Close">×</button><span class="eyebrow">Follow-up contact listing</span><h2 id="listingTitle">Contact list</h2><p id="listingLead">Records that need action.</p><div class="tableWrap modalTableWrap" id="listingBody"></div></section></div><footer class="footer">Fictional/anonymized healthcare sample by LynxCom Analytics · <a href="../project-samples.php">Back to completed projects</a></footer>
-<script src="assets/app.js?v=hospital-command-v4"></script>
+<script src="assets/app.js?v=hospital-ops-suite-v5"></script>
 </body></html>
