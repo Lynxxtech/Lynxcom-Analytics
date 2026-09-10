@@ -8,7 +8,7 @@ $name=trim($_GET['name']??''); $phone=trim($_GET['phone']??''); $email=trim($_GE
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Business Data Foundation & Tracking System Intake | Lynxcom Analytics</title>
+<title>Data Foundation Intake | LynxCom Analytics</title>
 <link rel="canonical" href="https://lynxcomanalytics.com/foundation-intake.php">
 <meta name="robots" content="noindex,nofollow">
 <meta name="description" content="Business Data Foundation & Tracking System intake for businesses that need record structure before dashboard insights.">

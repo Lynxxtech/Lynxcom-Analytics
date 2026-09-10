@@ -7,7 +7,7 @@ if(!$post){ http_response_code(404); }
 $title=$post['title']??'Article not found';
 $desc=$post['summary']??'LynxCom Analytics blog article.';
 $seoTitle=$title;
-if(strlen($seoTitle)>58) $seoTitle=substr($seoTitle,0,55).'...';
+if(strlen($seoTitle)>47) $seoTitle=substr($seoTitle,0,44).'...';
 $seoDesc=$desc;
 if(strlen($seoDesc)>165) $seoDesc=substr($seoDesc,0,162).'...';
 $cover=$post?cover_image($post):'assets/section-services.jpg';
