@@ -1,4 +1,5 @@
 <?php
+header('X-Robots-Tag: noindex, nofollow', true);
 require __DIR__.'/includes/functions.php';
 track_visit('Foundation package thank you');
 $c=load_content();
