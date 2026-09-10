@@ -39,6 +39,7 @@ $blogStats = blog_view_stats($posts);
       <a href="#growth-intakes"><span class="dashicon">▤</span> Growth Intakes</a>
       <a href="#mail-log"><span class="dashicon">✉</span> Mail Log</a>
       <a href="#traffic"><span class="dashicon">↗</span> Traffic</a>
+      <a href="seo-audit.php"><span class="dashicon">◎</span> SEO Audit</a>
       <a href="#blog-analytics"><span class="dashicon">◉</span> Blog Analytics</a>
       <a href="#blog"><span class="dashicon">✎</span> Blog Posts</a>
       <a href="#content"><span class="dashicon">⚙</span> Site Content</a>
