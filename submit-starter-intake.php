@@ -2,7 +2,7 @@
 require __DIR__.'/includes/functions.php';
 if($_SERVER['REQUEST_METHOD']!=='POST') { header('Location: starter-intake.php'); exit; }
 if(!check_csrf()) die('Invalid request.');
-if(!empty($_POST['website'])) die('Spam blocked.');
+if(!empty($_POST['lx_honeypot'])) die('Spam blocked.');
 
 $fields=['lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','current_tools','records_kept','record_location','record_frequency','data_quality','sales_channels','products_services','monthly_transactions','current_reports','kpis_tracked','top_business_goals','biggest_reporting_pain','repetitive_tasks','customer_followup_method','missed_followups','payment_tracking','debtor_tracking','inventory_tracking','staff_tracking','customer_data_available','data_formats_available','access_method','sample_data_ready','dashboard_users','dashboard_frequency','preferred_dashboard_format','automation_priorities','success_definition','budget_confirmed','timeline','decision_maker','training_needed','privacy_consent','extra_notes'];
 $data=[]; foreach($fields as $f){ $data[$f]=safe_text($f,4000); }

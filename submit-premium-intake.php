@@ -2,7 +2,7 @@
 require __DIR__.'/includes/functions.php';
 if($_SERVER['REQUEST_METHOD']!=='POST') { header('Location: premium-intake.php'); exit; }
 if(!check_csrf()) die('Invalid request.');
-if(!empty($_POST['website'])) die('Spam blocked.');
+if(!empty($_POST['lx_honeypot'])) die('Spam blocked.');
 
 $fields=['lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','decision_maker','decision_process','project_sponsor','business_overview','primary_goals','success_definition','current_tools','systems_in_use','data_sources','data_volume','data_owners','data_quality','data_cleanup_needed','historical_data_needed','departments_in_scope','dashboard_kpis','management_questions','dashboard_users','dashboard_devices','dashboard_permissions','reporting_cadence','report_exports','tracker_modules','customer_data','customer_journey','customer_followup_channels','customer_automation_needs','sales_process','payment_process','inventory_process','staff_operations','approval_processes','workflow_bottlenecks','automation_priorities','ai_use_cases','ai_boundaries','notification_channels','integrations_needed','api_access_status','existing_sops','documentation_needed','training_users','support_expectation','security_requirements','data_privacy_consent','access_method','sample_data_ready','implementation_timeline','urgency','budget_confirmed','payment_preference','stakeholder_availability','risks_concerns','extra_notes'];
 $data=[]; foreach($fields as $f){ $data[$f]=safe_text($f,7000); }
