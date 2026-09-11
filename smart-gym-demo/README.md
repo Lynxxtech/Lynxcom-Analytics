@@ -1,13 +1,13 @@
-# Smart Gym sample website
+# Smart Gym Website
 
-Hostinger-ready PHP demo for a gym client website + LynxCom data collection direction.
+Hostinger-ready PHP website for Smart Gym.
 
 Files:
-- index.php: public website with sample service/pricing/content
-- submit-member.php: sample member registration data capture
-- thank-you.php: noindex post-submit page
+- index.php: public website
+- submit-member.php: member registration and enquiry capture
+- thank-you.php: noindex post-submit confirmation page
 - assets/styles.css: responsive design
-- assets/script.js: mobile navigation
+- assets/script.js: interactions
 - data/member-registrations.csv: created automatically after form submissions
 
-This is a sample content prototype. Replace sample prices, trainers, address, phone, email, images and exact client offer before production deployment.
+Before moving to the final hosting account, update the confirmed business address, phone/WhatsApp, email, final pricing, trainer names and any other business-specific details.
