@@ -1,4 +1,4 @@
-# Smart Gym website
+# Smart Shape Fitness Gym website
 
 Hostinger-ready PHP website for a gym client website + LynxCom data collection direction.
 
