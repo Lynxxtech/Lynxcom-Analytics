@@ -2,7 +2,7 @@
 require __DIR__.'/includes/functions.php';
 if($_SERVER['REQUEST_METHOD']!=='POST') { header('Location: foundation-intake.php'); exit; }
 if(!check_csrf()) die('Invalid request.');
-if(!empty($_POST['lx_honeypot'])) die('Spam blocked.');
+if(!empty($_POST['website'])) die('Spam blocked.');
 
 $fields=['lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','current_record_status','why_no_records','current_tools','daily_sales_process','customer_capture_process','payment_tracking_status','expense_tracking_status','stock_or_service_tracking','staff_task_tracking','followup_tracking_status','debtors_or_pending_payments','reports_needed','people_who_will_update','update_frequency','training_needed','preferred_tool','foundation_modules','automation_interest','dashboard_later_goal','success_definition','budget_confirmed','timeline','decision_maker','privacy_consent','extra_notes'];
 $data=[]; foreach($fields as $f){ $data[$f]=safe_text($f,4000); }

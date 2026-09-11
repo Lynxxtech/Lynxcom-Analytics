@@ -2,7 +2,7 @@
 require __DIR__.'/includes/functions.php';
 if($_SERVER['REQUEST_METHOD']!=='POST') { header('Location: growth-intake.php'); exit; }
 if(!check_csrf()) die('Invalid request.');
-if(!empty($_POST['lx_honeypot'])) die('Spam blocked.');
+if(!empty($_POST['website'])) die('Spam blocked.');
 
 $fields=['lead_name','lead_phone','lead_email','business_name','role','industry','location','years_active','staff_count','branches','decision_maker','current_tools','records_kept','data_sources','record_owners','record_frequency','data_quality','data_cleanup_needed','sample_data_ready','sales_channels','customer_segments','products_services','monthly_transactions','average_order_value','payment_methods','customer_data_available','customer_followup_method','current_reports','report_frequency','kpis_tracked','management_questions','dashboard_users','dashboard_devices','dashboard_frequency','preferred_dashboard_format','required_dashboard_pages','filtering_needs','access_roles','export_needs','tracker_needs','customer_tracker_needs','staff_tracker_needs','payment_tracker_needs','inventory_tracker_needs','workflow_current','workflow_bottlenecks','workflow_automation_needs','notifications_needed','approval_processes','integrations_needed','training_users','support_expectation','success_definition','budget_confirmed','timeline','urgency','privacy_consent','extra_notes'];
 $data=[]; foreach($fields as $f){ $data[$f]=safe_text($f,5000); }
