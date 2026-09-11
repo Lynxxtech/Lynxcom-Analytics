@@ -328,3 +328,9 @@ body:not(.wp-admin-body) .site-header.is-scrolled{box-shadow:0 18px 48px rgba(6,
 .foundation-intake-page .growth-intake-hero p{
   color:#fff!important;
 }
+
+
+/* Homepage slider image visibility adjustment */
+.lx-slide-shade{
+  background:linear-gradient(90deg,rgba(6,27,49,.66) 0%,rgba(6,27,49,.46) 40%,rgba(6,27,49,.14) 72%,rgba(6,27,49,.03) 100%),linear-gradient(180deg,rgba(6,27,49,.04),rgba(6,27,49,.38))!important;
+}
