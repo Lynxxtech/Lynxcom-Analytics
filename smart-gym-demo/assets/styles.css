@@ -17,3 +17,9 @@
 .dynamic-metrics .metric-tile.active{outline:3px solid rgba(255,255,255,.36)}
 .metric-insight{grid-column:1/-1;background:rgba(0,0,0,.36);border:1px solid rgba(255,255,255,.22);border-radius:24px;padding:22px;color:#fff;display:none}
 .metric-insight.show{display:block}.metric-insight h3{margin:0 0 8px;font-size:26px}.metric-insight p{margin:0;color:#ffe4cf;line-height:1.65}
+
+/* Softer deep red transformation color */
+.transformation{background:linear-gradient(135deg,#c5301f 0%,#8f1f17 58%,#53110f 100%) !important}
+.transformation .label{color:#ffd4a8}
+.transformation .progress-board div,.dynamic-metrics .metric-tile{background:rgba(0,0,0,.24)}
+.dynamic-metrics .metric-tile:hover{background:rgba(0,0,0,.34)}
