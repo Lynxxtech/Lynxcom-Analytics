@@ -37,3 +37,6 @@
 
 /* Smart Shape brand logo */
 .sg-logo{gap:10px}.sg-logo .brand-logo{width:54px;height:54px;object-fit:contain;border-radius:16px;box-shadow:0 0 30px rgba(197,48,31,.32)}.sg-logo span{display:none}.sg-logo b{font-size:26px;line-height:.9;max-width:120px}.sg-footer b{font-size:30px}@media(max-width:640px){.sg-logo .brand-logo{width:46px;height:46px}.sg-logo b{font-size:22px;max-width:100px}}
+
+/* Professional logo header fit */
+.sg-logo .brand-logo{width:92px;height:52px;object-fit:contain;border-radius:10px;background:#080808;box-shadow:0 0 24px rgba(197,48,31,.22)}.sg-logo b{display:none}@media(max-width:640px){.sg-logo .brand-logo{width:82px;height:46px}}
