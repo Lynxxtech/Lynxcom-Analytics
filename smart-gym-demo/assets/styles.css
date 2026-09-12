@@ -74,3 +74,15 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}.sg-header,main,section,fo
 @media(max-width:380px){
   .sg-header{grid-template-columns:auto 1fr auto;padding:9px 12px}.sg-logo .brand-logo{width:92px;height:52px}.header-btn{font-size:8px;padding:8px 9px}.mobile-menu-toggle{height:36px;padding:0 10px;font-size:9px}.sg-header nav{grid-template-columns:1fr}.hero-stage h1{font-size:34px}.hero-actions .btn{flex-basis:100%}.main-photo,.hero-right .main-photo{height:230px}
 }
+
+/* Desktop hero/header left alignment */
+@media(min-width:901px){
+  .hero-stage{justify-items:start;text-align:left;padding-left:clamp(34px,5vw,72px);padding-right:clamp(34px,5vw,72px)}
+  .hero-left{justify-self:start;align-self:center;text-align:left;margin-left:0;padding-left:0;max-width:720px}
+  .hero-left .mini,.hero-left h1,.hero-left .hero-text{text-align:left;margin-left:0}
+  .hero-text{max-width:620px}
+  .hero-actions{justify-content:flex-start;text-align:left}
+  .hero-right{justify-self:stretch;width:100%}
+  .shop-hero>div{justify-self:start;text-align:left;margin-left:0;padding-left:0;max-width:720px}
+  .shop-hero h1,.shop-hero p,.shop-hero .label{text-align:left;margin-left:0}
+}
