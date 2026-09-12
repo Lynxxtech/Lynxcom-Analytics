@@ -20,3 +20,20 @@ if(metricBoard){
     });
   });
 }
+
+// Smart Shape mobile menu
+(function(){
+  const btn = document.querySelector('.mobile-menu-toggle');
+  const nav = document.querySelector('.sg-header nav');
+  if(!btn || !nav) return;
+  btn.addEventListener('click', () => {
+    const open = document.body.classList.toggle('mobile-menu-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? 'Close' : 'Menu';
+  });
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    document.body.classList.remove('mobile-menu-open');
+    btn.setAttribute('aria-expanded','false');
+    btn.textContent='Menu';
+  }));
+})();
