@@ -150,3 +150,6 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}.sg-header,main,section,fo
 /* Promo right-to-left direction */
 .promo-track{animation-name:promoGlideRtl!important;animation-duration:82s!important}
 @keyframes promoGlideRtl{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* Real shop product photo polish */
+.shop-grid .product-thumb,.shop-item-grid .product-thumb{background:#f4f1ec!important;border:1px solid rgba(0,0,0,.08)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)!important;object-fit:contain!important;padding:8px!important;height:185px!important;min-height:185px!important}.shop-item-grid .product-thumb{height:205px!important;min-height:205px!important}@media(max-width:760px){.shop-grid .product-thumb,.shop-item-grid .product-thumb{height:180px!important;min-height:180px!important}.shop-item-grid .product-thumb{height:195px!important;min-height:195px!important}}

@@ -1,0 +1,78 @@
+[
+  {
+    "slug": "whey-protein",
+    "status": "real",
+    "title": "File:Bodybuilding supplement high protein drink mix 700g.jpg",
+    "query": "protein supplement powder",
+    "kb": 12.2
+  },
+  {
+    "slug": "pre-workout",
+    "status": "real",
+    "title": "File:Adonis Men's Pre-workout.jpg",
+    "query": "pre workout supplement",
+    "kb": 27.7
+  },
+  {
+    "slug": "creatine",
+    "status": "real",
+    "title": "File:CCDS creatine production.jpg",
+    "query": "creatine supplement",
+    "kb": 27.3
+  },
+  {
+    "slug": "shaker-bottle",
+    "status": "real",
+    "title": "File:Osaka protein shaker.jpg",
+    "query": "protein shaker bottle",
+    "kb": 15.5
+  },
+  {
+    "slug": "gym-gloves",
+    "status": "real",
+    "title": "File:Black Latex glove 0033.jpg",
+    "query": "fitness gloves",
+    "kb": 8.8
+  },
+  {
+    "slug": "resistance-bands",
+    "status": "real",
+    "title": "File:Attractive young woman have exercise with tape in the gym.jpg",
+    "query": "resistance bands exercise",
+    "kb": 41.0
+  },
+  {
+    "slug": "skipping-rope",
+    "status": "real",
+    "title": "File:Exercise equipment (rubber ball, light-weight dumbbells, jump rope).jpg",
+    "query": "jump rope exercise",
+    "kb": 49.9
+  },
+  {
+    "slug": "lifting-belt",
+    "status": "real",
+    "title": "File:LiftingBelt.JPG",
+    "query": "weightlifting belt",
+    "kb": 40.9
+  },
+  {
+    "slug": "training-shirt",
+    "status": "fallback",
+    "kb": 2.3
+  },
+  {
+    "slug": "joggers",
+    "status": "fallback",
+    "kb": 2.3
+  },
+  {
+    "slug": "sports-towel",
+    "status": "fallback",
+    "kb": 2.3
+  },
+  {
+    "slug": "gym-bag",
+    "status": "fallback",
+    "kb": 2.2
+  }
+]
