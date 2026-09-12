@@ -136,3 +136,8 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}.sg-header,main,section,fo
 .promo-track span{display:inline-block;padding-left:100vw;padding-right:20px;color:#140202;text-shadow:0 1px 0 rgba(255,255,255,.18)}
 @keyframes promoGlide{0%{transform:translateX(-100%)}100%{transform:translateX(0)}}
 @media(max-width:760px){.promo-track{font-size:11px;padding:10px 0;animation-duration:20s;letter-spacing:.05em}.promo-track span{padding-left:100vw}}
+
+/* Promo bar slower white text update */
+.promo-track{animation-duration:48s!important;color:#fff!important;font-weight:1000!important;font-size:14px!important;text-shadow:none!important}
+.promo-track span{color:#fff!important;font-weight:1000!important;text-shadow:0 1px 8px rgba(0,0,0,.28)!important}
+@media(max-width:760px){.promo-track{animation-duration:42s!important;font-size:12px!important}}
