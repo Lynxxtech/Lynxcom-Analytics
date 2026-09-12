@@ -86,3 +86,12 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}.sg-header,main,section,fo
   .shop-hero>div{justify-self:start;text-align:left;margin-left:0;padding-left:0;max-width:720px}
   .shop-hero h1,.shop-hero p,.shop-hero .label{text-align:left;margin-left:0}
 }
+
+/* Section headings left alignment */
+.section-title{justify-content:flex-start;text-align:left;align-items:flex-start;width:100%}
+.section-title span,.section-title h2{text-align:left;margin-left:0;margin-right:auto}
+.section-title h2{width:100%;max-width:900px}
+.section-title .section-more{margin-left:0;margin-right:auto}
+.membership-section .section-title,.gallery-section .section-title,.schedule .section-title,.shop-section .section-title,.coaches .section-title,.testimonial-section .section-title,.shop-category .section-title{justify-content:flex-start;text-align:left}
+.membership-section .section-title h2,.gallery-section .section-title h2,.schedule .section-title h2,.shop-section .section-title h2,.coaches .section-title h2,.testimonial-section .section-title h2,.shop-category .section-title h2{text-align:left;margin-left:0;margin-right:auto}
+@media(min-width:901px){.section-title{display:block}.section-more{display:inline-block}}
