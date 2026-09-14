@@ -153,3 +153,8 @@ html,body{width:100%;max-width:100%;overflow-x:hidden}.sg-header,main,section,fo
 
 /* Real shop product photo polish */
 .shop-grid .product-thumb,.shop-item-grid .product-thumb{background:#f4f1ec!important;border:1px solid rgba(0,0,0,.08)!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)!important;object-fit:contain!important;padding:8px!important;height:185px!important;min-height:185px!important}.shop-item-grid .product-thumb{height:205px!important;min-height:205px!important}@media(max-width:760px){.shop-grid .product-thumb,.shop-item-grid .product-thumb{height:180px!important;min-height:180px!important}.shop-item-grid .product-thumb{height:195px!important;min-height:195px!important}}
+
+/* Bigger visible Smart Shape logo */
+.sg-logo .brand-logo{width:132px;height:72px;border-radius:14px;object-fit:contain}
+@media(max-width:760px){.sg-logo .brand-logo{width:122px;height:66px}}
+@media(max-width:380px){.sg-logo .brand-logo{width:104px;height:58px}}
